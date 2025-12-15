@@ -3,22 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ACTIVITY 2.0 - Christmas Themed Shapes</title>
+    <title>ACTIVITY 2.0 - A Christmas Story Book</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Dancing+Script:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(180deg, #0d4f2b 0%, #145a32 30%, #1a6b3c 50%, #145a32 70%, #0d4f2b 100%);
-            min-height: 100vh;
-            padding: 40px 20px 60px;
-            position: relative;
-            overflow-x: hidden;
+        :root {
+            --christmas-red: #c41e3a;
+            --christmas-green: #145a32;
+            --gold: #FFD700;
+            --snow-white: #f8f9fa;
+            --deep-red: #8b0000;
+            --pine-green: #0d4f2b;
         }
         
-        /* Elegant Snowfall */
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: linear-gradient(180deg, #0a3d22 0%, #0d4f2b 20%, #145a32 50%, #0d4f2b 80%, #0a3d22 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ==================== SNOWFALL EFFECT ==================== */
         .snow-container {
             position: fixed;
             top: 0;
@@ -26,333 +33,402 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 1;
+            z-index: 100;
             overflow: hidden;
         }
         
         .snowflake {
             position: absolute;
             top: -20px;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 12px;
             animation: snowfall linear infinite;
-            text-shadow: 0 0 5px rgba(255,255,255,0.5);
+            text-shadow: 0 0 8px rgba(255,255,255,0.6);
         }
         
         @keyframes snowfall {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0.3; }
+            0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 1; }
+            50% { transform: translateY(50vh) rotate(180deg) translateX(20px); }
+            100% { transform: translateY(100vh) rotate(360deg) translateX(-20px); opacity: 0.3; }
         }
-        
-        /* Top Garland */
-        .garland {
-            position: fixed;
+
+        /* ==================== BOOK CONTAINER ==================== */
+        .book-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* ==================== BOOK COVER ==================== */
+        .book-cover {
+            background: linear-gradient(145deg, #1a0a0a 0%, #2d1212 30%, #4a1a1a 50%, #2d1212 70%, #1a0a0a 100%);
+            border-radius: 8px 30px 30px 8px;
+            padding: 80px 60px;
+            margin-bottom: 60px;
+            position: relative;
+            box-shadow: 
+                -5px 0 20px rgba(0,0,0,0.5),
+                0 25px 50px rgba(0,0,0,0.5),
+                inset 3px 0 15px rgba(255,215,0,0.1);
+            border-left: 8px solid var(--gold);
+            overflow: hidden;
+        }
+
+        .book-cover::before {
+            content: '';
+            position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 60px;
-            background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, transparent 100%);
-            z-index: 10;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding-top: 5px;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255,215,0,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,215,0,0.05) 0%, transparent 50%);
+            pointer-events: none;
         }
-        
-        .garland-content {
-            display: flex;
-            gap: 30px;
-            font-size: 28px;
+
+        .cover-ornament {
+            position: absolute;
+            font-size: 40px;
+            opacity: 0.6;
         }
-        
-        .header {
+        .cover-ornament.top-left { top: 20px; left: 30px; }
+        .cover-ornament.top-right { top: 20px; right: 30px; }
+        .cover-ornament.bottom-left { bottom: 20px; left: 30px; }
+        .cover-ornament.bottom-right { bottom: 20px; right: 30px; }
+
+        .cover-title {
             text-align: center;
-            margin: 50px 0 40px;
             position: relative;
             z-index: 5;
         }
-        
-        .header h1 {
+
+        .cover-title h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 72px;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(255,215,0,0.5), 2px 2px 4px rgba(0,0,0,0.8);
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+        }
+
+        .cover-title .subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            color: #d4af37;
+            font-style: italic;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+        }
+
+        .cover-illustration {
+            text-align: center;
+            font-size: 120px;
+            margin: 40px 0;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+        }
+
+        .cover-quote {
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            color: #c9a227;
+            font-style: italic;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* ==================== BOOK PAGES ==================== */
+        .book-page {
+            background: linear-gradient(135deg, #fefefe 0%, #f8f5f0 50%, #f0ebe0 100%);
+            border-radius: 4px 20px 20px 4px;
+            padding: 60px 50px;
+            margin-bottom: 40px;
+            position: relative;
+            box-shadow: 
+                0 15px 40px rgba(0,0,0,0.3),
+                inset 0 0 80px rgba(139,69,19,0.05);
+            border-left: 3px solid #d4c4a8;
+            overflow: hidden;
+            min-height: 600px;
+        }
+
+        .book-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50px;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(139,69,19,0.08) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 25px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            color: #8b7355;
+            font-style: italic;
+        }
+        .page-number.left { left: 50px; }
+        .page-number.right { right: 50px; }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-header h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 56px;
-            color: #FFD700;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 40px rgba(255,215,0,0.3);
+            font-size: 42px;
+            color: var(--christmas-red);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
             margin-bottom: 10px;
         }
-        
-        .header p {
+
+        .page-header .chapter {
+            font-family: 'Dancing Script', cursive;
             font-size: 20px;
-            color: #98FB98;
-            font-weight: 400;
+            color: var(--christmas-green);
+            letter-spacing: 3px;
         }
-        
-        /* Christmas Banner */
-        .christmas-banner {
-            max-width: 500px;
-            margin: 25px auto;
-            background: linear-gradient(90deg, transparent, #c41e3a 10%, #c41e3a 90%, transparent);
-            padding: 12px 40px;
-            position: relative;
-        }
-        
-        .christmas-banner::before,
-        .christmas-banner::after {
-            content: '';
-            position: absolute;
-            bottom: -12px;
-            width: 0;
-            height: 0;
-            border-style: solid;
-        }
-        
-        .christmas-banner::before {
-            left: 50px;
-            border-width: 12px 12px 0 0;
-            border-color: #8B0000 transparent transparent transparent;
-        }
-        
-        .christmas-banner::after {
-            right: 50px;
-            border-width: 12px 0 0 12px;
-            border-color: #8B0000 transparent transparent transparent;
-        }
-        
-        .christmas-banner span {
-            font-family: 'Playfair Display', serif;
-            font-size: 26px;
-            color: white;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-        
-        .shapes-container {
+
+        .page-content {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 35px;
-            max-width: 1500px;
-            margin: 40px auto;
-            position: relative;
-            z-index: 5;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
         }
-        
-        .shape-card {
-            background: linear-gradient(145deg, #ffffff 0%, #f5f5f5 100%);
-            border-radius: 20px;
-            padding: 25px;
-            width: 340px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.8);
-            border: 3px solid #c41e3a;
-            position: relative;
-        }
-        
-        .shape-card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: #FFD700;
-            border-radius: 0 0 4px 4px;
-        }
-        
-        .shape-card h3 {
-            text-align: center;
-            font-family: 'Playfair Display', serif;
-            font-size: 22px;
-            color: #c41e3a;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-        
-        .shape-display {
+
+        .shape-showcase {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 200px;
-            margin-bottom: 15px;
+            min-height: 250px;
+            position: relative;
         }
-        
-        .specs {
-            font-size: 11px;
-            color: #2d5a3d;
-            background: linear-gradient(135deg, #f0fff0 0%, #e8f5e9 100%);
-            padding: 12px;
-            border-radius: 10px;
-            line-height: 1.7;
-            border: 1px solid #c8e6c9;
+
+        .verse {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            color: #4a4a4a;
+            text-align: center;
+            line-height: 1.9;
+            max-width: 550px;
+            font-style: italic;
         }
-        
-        .specs strong { color: #c41e3a; }
-        
-        /* ==================== RECTANGLE - Gift Box ==================== */
-        .rectangle-shape {
-            width: 220px;
-            height: 145px;
+
+        .verse .highlight {
+            color: var(--christmas-red);
+            font-weight: 600;
+        }
+
+        .message-box {
+            background: linear-gradient(135deg, rgba(196,30,58,0.08) 0%, rgba(196,30,58,0.03) 100%);
+            border: 1px solid rgba(196,30,58,0.2);
+            border-radius: 15px;
+            padding: 25px 35px;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .message-box::before {
+            content: '❝';
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            font-size: 50px;
+            color: rgba(196,30,58,0.2);
+            font-family: serif;
+        }
+
+        .message-box p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            color: #3a3a3a;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        /* ==================== PAGE 1: THE GIFT - RECTANGLE ==================== */
+        .gift-box {
+            width: 200px;
+            height: 150px;
             background: linear-gradient(145deg, #e53935 0%, #c62828 50%, #b71c1c 100%);
-            border-radius: 4px;
+            border-radius: 6px;
             position: relative;
             box-shadow: 
-                0 8px 0 #7f0000,
-                0 12px 20px rgba(0,0,0,0.4),
-                inset 0 2px 10px rgba(255,255,255,0.2);
+                0 10px 0 #7f0000,
+                0 15px 30px rgba(0,0,0,0.4),
+                inset 0 2px 15px rgba(255,255,255,0.2);
+            animation: giftFloat 4s ease-in-out infinite;
         }
-        
-        .rectangle-shape::before {
+
+        @keyframes giftFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .gift-box::before {
             content: '';
             position: absolute;
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 25px;
+            width: 28px;
             height: 100%;
             background: linear-gradient(90deg, #bf8c00, #FFD700, #fff5a0, #FFD700, #bf8c00);
         }
-        
-        .rectangle-shape::after {
+
+        .gift-box::after {
             content: '';
             position: absolute;
             top: 50%;
             left: 0;
             transform: translateY(-50%);
             width: 100%;
-            height: 25px;
+            height: 28px;
             background: linear-gradient(180deg, #bf8c00, #FFD700, #fff5a0, #FFD700, #bf8c00);
         }
-        
-        .ribbon-bow {
+
+        .gift-bow {
             position: absolute;
-            top: -25px;
+            top: -30px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 10;
         }
-        
+
         .bow-loop {
-            width: 35px;
-            height: 25px;
+            width: 40px;
+            height: 30px;
             background: linear-gradient(135deg, #FFD700, #ffc107);
-            border-radius: 50% 50% 50% 50%;
+            border-radius: 50%;
             position: absolute;
-            box-shadow: inset -3px -3px 5px rgba(0,0,0,0.2);
+            box-shadow: inset -4px -4px 8px rgba(0,0,0,0.2);
         }
-        
-        .bow-loop.left { left: -30px; transform: rotate(-30deg); }
-        .bow-loop.right { right: -30px; transform: rotate(30deg); }
-        
+
+        .bow-loop.left { left: -35px; transform: rotate(-35deg); }
+        .bow-loop.right { right: -35px; transform: rotate(35deg); }
+
         .bow-center {
-            width: 20px;
-            height: 20px;
+            width: 25px;
+            height: 25px;
             background: linear-gradient(135deg, #FFD700, #ff8f00);
             border-radius: 50%;
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
         }
-        
-        .rectangle-text {
+
+        .bow-tail {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-family: 'Playfair Display', serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            z-index: 5;
-            background: rgba(183, 28, 28, 0.9);
-            padding: 5px 15px;
-            border-radius: 3px;
+            width: 15px;
+            height: 45px;
+            background: linear-gradient(180deg, #FFD700, #bf8c00);
+            top: 20px;
         }
-        
-        /* ==================== OVAL - Christmas Ornament ==================== */
-        .oval-shape {
+        .bow-tail.left { left: -20px; transform: rotate(-20deg); border-radius: 0 0 50% 50%; }
+        .bow-tail.right { right: -20px; transform: rotate(20deg); border-radius: 0 0 50% 50%; }
+
+        /* ==================== PAGE 2: THE JOY - OVAL/ORNAMENT ==================== */
+        .ornament-display {
             width: 160px;
-            height: 190px;
+            height: 200px;
             position: relative;
+            animation: ornamentSwing 3s ease-in-out infinite;
         }
-        
-        .ornament-cap {
-            width: 35px;
+
+        @keyframes ornamentSwing {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        .orn-string {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            width: 2px;
+            height: 35px;
+            background: linear-gradient(180deg, #888, #666);
+        }
+
+        .orn-cap {
+            width: 40px;
             height: 25px;
-            background: linear-gradient(180deg, #e0e0e0 0%, #9e9e9e 50%, #757575 100%);
-            border-radius: 5px 5px 0 0;
+            background: linear-gradient(180deg, #e8e8e8 0%, #a0a0a0 50%, #707070 100%);
+            border-radius: 6px 6px 0 0;
             margin: 0 auto;
             position: relative;
             z-index: 5;
-            box-shadow: inset 0 2px 5px rgba(255,255,255,0.5);
+            box-shadow: inset 0 3px 8px rgba(255,255,255,0.5);
         }
-        
-        .ornament-cap::before {
-            content: '';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 15px;
-            border: 3px solid #757575;
-            border-bottom: none;
-            border-radius: 10px 10px 0 0;
-        }
-        
-        .ornament-ball {
+
+        .orn-ball {
             width: 160px;
             height: 160px;
             background: radial-gradient(ellipse at 30% 25%, #ff8a80 0%, #e53935 30%, #c62828 60%, #8b0000 100%);
             border-radius: 50%;
             position: relative;
             box-shadow: 
-                0 15px 30px rgba(0,0,0,0.4),
-                inset -20px -20px 40px rgba(0,0,0,0.3),
-                inset 15px 15px 30px rgba(255,255,255,0.2);
+                0 20px 40px rgba(0,0,0,0.4),
+                inset -25px -25px 50px rgba(0,0,0,0.3),
+                inset 20px 20px 40px rgba(255,255,255,0.2);
         }
-        
-        .ornament-shine {
+
+        .orn-shine {
             position: absolute;
             top: 20px;
-            left: 25px;
-            width: 30px;
-            height: 40px;
-            background: rgba(255,255,255,0.4);
+            left: 30px;
+            width: 35px;
+            height: 50px;
+            background: rgba(255,255,255,0.45);
             border-radius: 50%;
             transform: rotate(-30deg);
         }
-        
-        .ornament-text {
+
+        .orn-pattern {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-family: 'Playfair Display', serif;
-            font-size: 22px;
-            font-weight: 700;
-            color: #FFD700;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-size: 70px;
+            opacity: 0.15;
         }
-        
-        /* ==================== TRIANGLE - Christmas Tree ==================== */
-        .triangle-shape {
-            width: 200px;
-            height: 260px;
+
+        /* ==================== PAGE 3: THE HOPE - TRIANGLE/TREE ==================== */
+        .christmas-tree {
+            width: 220px;
+            height: 300px;
             position: relative;
+            animation: treeGlow 2s ease-in-out infinite alternate;
         }
-        
+
+        @keyframes treeGlow {
+            0% { filter: drop-shadow(0 0 10px rgba(255,215,0,0.3)); }
+            100% { filter: drop-shadow(0 0 25px rgba(255,215,0,0.6)); }
+        }
+
         .tree-star {
             position: absolute;
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 35px;
-            filter: drop-shadow(0 0 10px rgba(255,215,0,0.8));
+            font-size: 45px;
             z-index: 10;
+            animation: starTwinkle 1.5s ease-in-out infinite;
         }
-        
-        .tree-layer {
+
+        @keyframes starTwinkle {
+            0%, 100% { transform: translateX(-50%) scale(1); opacity: 1; }
+            50% { transform: translateX(-50%) scale(1.2); opacity: 0.8; }
+        }
+
+        .tree-tier {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
@@ -360,349 +436,357 @@
             height: 0;
             border-style: solid;
         }
-        
-        .tree-layer.layer1 {
-            top: 30px;
-            border-width: 0 50px 70px 50px;
+
+        .tree-tier.t1 {
+            top: 40px;
+            border-width: 0 55px 80px 55px;
+            border-color: transparent transparent #1b5e20 transparent;
+            filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.3));
+        }
+
+        .tree-tier.t2 {
+            top: 85px;
+            border-width: 0 75px 95px 75px;
             border-color: transparent transparent #2e7d32 transparent;
-            filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.3));
+            filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.3));
         }
-        
-        .tree-layer.layer2 {
-            top: 70px;
-            border-width: 0 65px 80px 65px;
+
+        .tree-tier.t3 {
+            top: 140px;
+            border-width: 0 95px 110px 95px;
             border-color: transparent transparent #388e3c transparent;
-            filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.3));
+            filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.3));
         }
-        
-        .tree-layer.layer3 {
-            top: 115px;
-            border-width: 0 80px 90px 80px;
-            border-color: transparent transparent #43a047 transparent;
-            filter: drop-shadow(3px 3px 5px rgba(0,0,0,0.3));
-        }
-        
-        .tree-trunk {
+
+        .tree-trunk-display {
             position: absolute;
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 35px;
-            height: 40px;
-            background: linear-gradient(90deg, #5d4037 0%, #8d6e63 50%, #5d4037 100%);
-            border-radius: 0 0 5px 5px;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+            width: 45px;
+            height: 50px;
+            background: linear-gradient(90deg, #4e342e 0%, #795548 50%, #4e342e 100%);
+            border-radius: 0 0 6px 6px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.4);
         }
-        
-        .tree-ornament {
+
+        .tree-bauble {
             position: absolute;
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
-            box-shadow: inset -2px -2px 4px rgba(0,0,0,0.3), 0 2px 4px rgba(0,0,0,0.2);
+            box-shadow: inset -3px -3px 6px rgba(0,0,0,0.3), 0 2px 5px rgba(0,0,0,0.2);
             z-index: 5;
+            animation: baubleGlow 2s ease-in-out infinite;
         }
-        
-        .tree-ornament:nth-child(5) { background: #c41e3a; top: 65px; left: 93px; }
-        .tree-ornament:nth-child(6) { background: #FFD700; top: 100px; left: 75px; }
-        .tree-ornament:nth-child(7) { background: #1565c0; top: 100px; left: 115px; }
-        .tree-ornament:nth-child(8) { background: #c41e3a; top: 135px; left: 60px; }
-        .tree-ornament:nth-child(9) { background: #9c27b0; top: 140px; left: 130px; }
-        .tree-ornament:nth-child(10) { background: #FFD700; top: 170px; left: 85px; }
-        .tree-ornament:nth-child(11) { background: #1565c0; top: 175px; left: 55px; }
-        .tree-ornament:nth-child(12) { background: #c41e3a; top: 180px; left: 140px; }
-        
-        .tree-text {
-            position: absolute;
-            top: 130px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: 'Playfair Display', serif;
-            font-size: 16px;
-            font-weight: 700;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-            z-index: 10;
+
+        @keyframes baubleGlow {
+            0%, 100% { box-shadow: inset -3px -3px 6px rgba(0,0,0,0.3), 0 2px 5px rgba(0,0,0,0.2); }
+            50% { box-shadow: inset -3px -3px 6px rgba(0,0,0,0.3), 0 0 12px currentColor; }
         }
+
+        /* Tier 1 baubles - top section */
+        .tree-bauble.b1 { background: #c41e3a; top: 85px; left: 103px; color: #c41e3a; }
         
-        /* ==================== SMILEY - Santa Face ==================== */
-        .smiley-shape {
-            width: 220px;
+        /* Tier 2 baubles - middle section */
+        .tree-bauble.b2 { background: #FFD700; top: 125px; left: 80px; color: #FFD700; }
+        .tree-bauble.b3 { background: #1565c0; top: 130px; left: 125px; color: #1565c0; }
+        
+        /* Tier 3 baubles - bottom section spread evenly */
+        .tree-bauble.b4 { background: #c41e3a; top: 175px; left: 55px; color: #c41e3a; }
+        .tree-bauble.b5 { background: #9c27b0; top: 170px; left: 100px; color: #9c27b0; }
+        .tree-bauble.b6 { background: #FFD700; top: 175px; left: 145px; color: #FFD700; }
+        .tree-bauble.b7 { background: #1565c0; top: 210px; left: 70px; color: #1565c0; }
+        .tree-bauble.b8 { background: #c41e3a; top: 215px; left: 135px; color: #c41e3a; }
+
+        /* ==================== PAGE 4: THE SPIRIT - SANTA/SMILEY ==================== */
+        .santa-display {
+            width: 200px;
             height: 280px;
             position: relative;
+            animation: santaBounce 2s ease-in-out infinite;
         }
-        
-        .santa-hat {
+
+        @keyframes santaBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .santa-hat-display {
             position: absolute;
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 180px;
-            height: 100px;
+            width: 160px;
+            height: 95px;
             z-index: 10;
         }
-        
-        .hat-base {
+
+        .hat-rim {
             position: absolute;
             bottom: 0;
-            left: 10px;
+            left: 0;
             width: 160px;
-            height: 28px;
-            background: linear-gradient(180deg, #ffffff 0%, #f0f0f0 50%, #e0e0e0 100%);
-            border-radius: 14px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            height: 30px;
+            background: linear-gradient(180deg, #ffffff 0%, #f5f5f5 50%, #e8e8e8 100%);
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
-        
-        .hat-cone {
+
+        .hat-body {
             position: absolute;
-            bottom: 22px;
-            left: 30px;
+            bottom: 20px;
+            left: 20px;
             width: 0;
             height: 0;
             border-left: 60px solid transparent;
             border-right: 60px solid transparent;
-            border-bottom: 80px solid #c41e3a;
-            filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.3));
+            border-bottom: 85px solid #c41e3a;
+            filter: drop-shadow(2px 2px 6px rgba(0,0,0,0.3));
         }
-        
-        .hat-cone::before {
-            content: '';
-            position: absolute;
-            top: 30px;
-            left: -40px;
-            width: 80px;
-            height: 50px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-        }
-        
+
         .hat-pom {
             position: absolute;
-            top: -15px;
+            top: -12px;
             left: 50%;
             transform: translateX(-50%);
-            width: 32px;
-            height: 32px;
-            background: radial-gradient(circle at 35% 35%, #ffffff 0%, #f5f5f5 40%, #e8e8e8 100%);
+            width: 35px;
+            height: 35px;
+            background: radial-gradient(circle at 35% 35%, #ffffff 0%, #f8f8f8 40%, #e0e0e0 100%);
             border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.25), inset -3px -3px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 12px rgba(0,0,0,0.25);
         }
-        
-        .santa-face {
+
+        .santa-face-display {
             position: absolute;
-            top: 80px;
+            top: 75px;
             left: 50%;
             transform: translateX(-50%);
-            width: 180px;
-            height: 170px;
-            background: radial-gradient(ellipse at 40% 35%, #ffe4c4 0%, #ffd4a3 50%, #deb887 100%);
+            width: 170px;
+            height: 165px;
+            background: radial-gradient(ellipse at 40% 35%, #ffe8cc 0%, #ffd4a3 50%, #d4a574 100%);
             border-radius: 50%;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
         }
-        
-        .santa-eye {
+
+        .santa-eye-display {
             position: absolute;
             top: 50px;
-            width: 18px;
-            height: 22px;
+            width: 16px;
+            height: 20px;
             background: #2c1810;
             border-radius: 50%;
         }
-        
-        .santa-eye.left { left: 50px; }
-        .santa-eye.right { right: 50px; }
-        
-        .santa-eye::after {
+
+        .santa-eye-display.left { left: 50px; }
+        .santa-eye-display.right { right: 50px; }
+
+        .santa-eye-display::after {
             content: '';
             position: absolute;
             top: 4px;
             left: 4px;
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
             background: white;
             border-radius: 50%;
         }
-        
-        .santa-nose {
+
+        .santa-nose-display {
             position: absolute;
             top: 70px;
             left: 50%;
             transform: translateX(-50%);
-            width: 28px;
-            height: 24px;
+            width: 30px;
+            height: 26px;
             background: radial-gradient(ellipse at 30% 30%, #ff9999 0%, #e53935 100%);
             border-radius: 50%;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
-        
-        .santa-cheek {
+
+        .santa-cheek-display {
             position: absolute;
             top: 75px;
-            width: 25px;
-            height: 18px;
+            width: 22px;
+            height: 16px;
             background: rgba(255, 150, 150, 0.5);
             border-radius: 50%;
         }
-        
-        .santa-cheek.left { left: 25px; }
-        .santa-cheek.right { right: 25px; }
-        
-        .santa-mouth {
+
+        .santa-cheek-display.left { left: 20px; }
+        .santa-cheek-display.right { right: 20px; }
+
+        .santa-smile {
             position: absolute;
             top: 100px;
             left: 50%;
             transform: translateX(-50%);
-            width: 40px;
-            height: 20px;
+            width: 45px;
+            height: 22px;
             border-bottom: 4px solid #8B4513;
-            border-radius: 0 0 20px 20px;
+            border-radius: 0 0 22px 22px;
         }
-        
-        .santa-beard {
+
+        .santa-beard-display {
             position: absolute;
-            bottom: -25px;
+            bottom: -30px;
             left: 50%;
             transform: translateX(-50%);
-            width: 160px;
-            height: 75px;
-            background: linear-gradient(180deg, #ffffff 0%, #f8f8f8 50%, #f0f0f0 100%);
-            border-radius: 0 0 80px 80px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            width: 150px;
+            height: 80px;
+            background: linear-gradient(180deg, #ffffff 0%, #fafafa 50%, #f0f0f0 100%);
+            border-radius: 0 0 75px 75px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.2);
         }
-        
-        .beard-wave {
+
+        .beard-curl {
             position: absolute;
-            top: -15px;
-            width: 40px;
-            height: 35px;
+            top: -18px;
+            width: 38px;
+            height: 38px;
             background: white;
             border-radius: 50%;
         }
-        
-        .beard-wave:nth-child(1) { left: 10px; }
-        .beard-wave:nth-child(2) { left: 40px; }
-        .beard-wave:nth-child(3) { left: 70px; }
-        .beard-wave:nth-child(4) { left: 100px; }
-        
-        .santa-text {
-            position: absolute;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: 'Playfair Display', serif;
-            font-size: 14px;
-            font-weight: 700;
-            color: #c41e3a;
-            z-index: 10;
-        }
-        
-        /* ==================== HEART - PERFECT SEAMLESS UPRIGHT SHAPE ==================== */
-        .heart-shape {
-            width: 220px;
-            height: 240px;
+
+        .beard-curl:nth-child(1) { left: 8px; }
+        .beard-curl:nth-child(2) { left: 38px; }
+        .beard-curl:nth-child(3) { left: 68px; }
+        .beard-curl:nth-child(4) { left: 98px; }
+
+        /* ==================== PAGE 5: THE LOVE - HEART ==================== */
+        .heart-display {
+            width: 200px;
+            height: 220px;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
+            animation: heartBeat 1.5s ease-in-out infinite;
         }
-        
-        .heart-bow {
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            15% { transform: scale(1.1); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.08); }
+            60% { transform: scale(1); }
+        }
+
+        .heart-ribbon {
             position: absolute;
-            top: 5px;
+            top: -5px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 15;
-            font-size: 35px;
-            filter: drop-shadow(0 3px 5px rgba(0,0,0,0.3));
+            font-size: 40px;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
         }
-        
-        /* Perfect upright heart using SVG approach */
-        .heart-container {
+
+        .heart-svg-container {
             position: relative;
             width: 180px;
             height: 180px;
-            margin-top: 25px;
+            margin-top: 20px;
         }
-        
-        .heart-svg {
+
+        .heart-svg-main {
             width: 180px;
             height: 180px;
-            filter: drop-shadow(4px 6px 12px rgba(0,0,0,0.4));
+            filter: drop-shadow(5px 8px 15px rgba(0,0,0,0.4));
         }
-        
-        .heart-gradient {
-            fill: url(#heartGrad);
-        }
-        
-        .heart-text-svg {
+
+        .heart-glow {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            font-weight: 700;
-            color: #FFD700;
-            text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
-            z-index: 12;
-        }
-        
-        .heart-shine-svg {
-            position: absolute;
-            top: 35px;
+            top: 40px;
             left: 45px;
-            width: 25px;
-            height: 35px;
+            width: 30px;
+            height: 40px;
             background: rgba(255,255,255,0.5);
             border-radius: 50%;
-            transform: rotate(-25deg);
+            transform: rotate(-30deg);
             z-index: 10;
         }
-        
-        .heart-shadow {
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 140px;
-            height: 25px;
-            background: radial-gradient(ellipse, rgba(0,0,0,0.35) 0%, transparent 70%);
-            border-radius: 50%;
-        }
-        
-        .footer {
+
+        /* ==================== FINAL PAGE ==================== */
+        .final-page {
+            background: linear-gradient(145deg, #1a0a0a 0%, #2d1515 30%, #3d1a1a 50%, #2d1515 70%, #1a0a0a 100%);
+            border-radius: 4px 20px 20px 4px;
+            padding: 80px 50px;
             text-align: center;
-            margin-top: 50px;
-            position: relative;
-            z-index: 5;
+            box-shadow: 
+                0 20px 50px rgba(0,0,0,0.5),
+                inset 0 0 100px rgba(255,215,0,0.03);
+            border-left: 3px solid #8b7355;
         }
-        
-        .footer p {
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            color: #FFD700;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+
+        .final-page h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 56px;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(255,215,0,0.4);
+            margin-bottom: 30px;
         }
-        
-        .footer .college {
-            font-family: 'Poppins', sans-serif;
-            color: #98FB98;
-            font-size: 14px;
-            margin-top: 10px;
+
+        .final-verse {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            color: #d4af37;
+            line-height: 2;
+            max-width: 600px;
+            margin: 0 auto 40px;
             font-style: italic;
+        }
+
+        .final-shapes {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 50px;
+            margin: 40px 0;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));
+        }
+
+        .footer-credit {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            color: #8b7355;
+            margin-top: 50px;
+            font-style: italic;
+        }
+
+        /* ==================== SVG DEFINITIONS ==================== */
+        .svg-defs { position: absolute; width: 0; height: 0; }
+
+        /* ==================== DECORATIVE ELEMENTS ==================== */
+        .holly-corner {
+            position: absolute;
+            font-size: 30px;
+            opacity: 0.7;
+        }
+        .holly-corner.tl { top: 15px; left: 20px; }
+        .holly-corner.tr { top: 15px; right: 20px; transform: scaleX(-1); }
+        .holly-corner.bl { bottom: 50px; left: 20px; }
+        .holly-corner.br { bottom: 50px; right: 20px; transform: scaleX(-1); }
+
+        .page-divider {
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--christmas-red), transparent);
+            margin: 20px auto;
         }
     </style>
 </head>
 <body>
     <!-- SVG Definitions -->
-    <svg width="0" height="0" style="position:absolute;">
+    <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg">
         <defs>
-            <linearGradient id="heartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <linearGradient id="heartGradMain" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:1" />
                 <stop offset="30%" style="stop-color:#e53935;stop-opacity:1" />
                 <stop offset="60%" style="stop-color:#c62828;stop-opacity:1" />
                 <stop offset="100%" style="stop-color:#b71c1c;stop-opacity:1" />
             </linearGradient>
-            <radialGradient id="heartRadial" cx="35%" cy="30%" r="60%">
+            <radialGradient id="heartRadialMain" cx="35%" cy="30%" r="60%">
                 <stop offset="0%" style="stop-color:#ff8a80;stop-opacity:1" />
                 <stop offset="40%" style="stop-color:#e53935;stop-opacity:1" />
                 <stop offset="70%" style="stop-color:#c62828;stop-opacity:1" />
@@ -713,175 +797,314 @@
 
     <!-- Snowfall -->
     <div class="snow-container">
-        <div class="snowflake" style="left:3%;animation-duration:10s;">❄</div>
-        <div class="snowflake" style="left:10%;animation-duration:14s;animation-delay:1s;">❄</div>
-        <div class="snowflake" style="left:18%;animation-duration:11s;animation-delay:3s;">❄</div>
-        <div class="snowflake" style="left:25%;animation-duration:13s;animation-delay:2s;">❄</div>
-        <div class="snowflake" style="left:33%;animation-duration:9s;animation-delay:4s;">❄</div>
-        <div class="snowflake" style="left:40%;animation-duration:12s;animation-delay:1s;">❄</div>
-        <div class="snowflake" style="left:48%;animation-duration:15s;animation-delay:5s;">❄</div>
-        <div class="snowflake" style="left:55%;animation-duration:10s;animation-delay:2s;">❄</div>
-        <div class="snowflake" style="left:63%;animation-duration:13s;animation-delay:3s;">❄</div>
-        <div class="snowflake" style="left:70%;animation-duration:11s;animation-delay:1s;">❄</div>
-        <div class="snowflake" style="left:78%;animation-duration:14s;animation-delay:4s;">❄</div>
-        <div class="snowflake" style="left:85%;animation-duration:9s;animation-delay:2s;">❄</div>
-        <div class="snowflake" style="left:93%;animation-duration:12s;animation-delay:3s;">❄</div>
-    </div>
-    
-    <!-- Garland -->
-    <div class="garland">
-        <div class="garland-content">
-            <span>🎄</span><span>🔴</span><span>🎄</span><span>🟡</span><span>🎄</span><span>🔴</span><span>🎄</span><span>🟡</span><span>🎄</span>
-        </div>
+        <div class="snowflake" style="left:2%;animation-duration:12s;">❄</div>
+        <div class="snowflake" style="left:8%;animation-duration:15s;animation-delay:1s;">❅</div>
+        <div class="snowflake" style="left:15%;animation-duration:10s;animation-delay:3s;">❆</div>
+        <div class="snowflake" style="left:22%;animation-duration:14s;animation-delay:2s;">❄</div>
+        <div class="snowflake" style="left:30%;animation-duration:11s;animation-delay:4s;">❅</div>
+        <div class="snowflake" style="left:38%;animation-duration:13s;animation-delay:1s;">❆</div>
+        <div class="snowflake" style="left:45%;animation-duration:16s;animation-delay:5s;">❄</div>
+        <div class="snowflake" style="left:52%;animation-duration:10s;animation-delay:2s;">❅</div>
+        <div class="snowflake" style="left:60%;animation-duration:14s;animation-delay:3s;">❆</div>
+        <div class="snowflake" style="left:68%;animation-duration:12s;animation-delay:1s;">❄</div>
+        <div class="snowflake" style="left:75%;animation-duration:15s;animation-delay:4s;">❅</div>
+        <div class="snowflake" style="left:83%;animation-duration:11s;animation-delay:2s;">❆</div>
+        <div class="snowflake" style="left:92%;animation-duration:13s;animation-delay:3s;">❄</div>
     </div>
 
-    <div class="header">
-        <h1>ACTIVITY 2.0</h1>
-        <p>Christmas Themed Formatted Shapes</p>
-        <div class="christmas-banner">
-            <span>🎅 Merry Christmas! 🎅</span>
-        </div>
-    </div>
-
-    <div class="shapes-container">
-        <!-- RECTANGLE -->
-        <div class="shape-card">
-            <h3>RECTANGLE</h3>
-            <div class="shape-display">
-                <div class="rectangle-shape">
-                    <div class="ribbon-bow">
-                        <div class="bow-loop left"></div>
-                        <div class="bow-loop right"></div>
-                        <div class="bow-center"></div>
-                    </div>
-                    <span class="rectangle-text">RECTANGLE</span>
-                </div>
+    <div class="book-container">
+        
+        <!-- ==================== BOOK COVER ==================== -->
+        <div class="book-cover">
+            <span class="cover-ornament top-left">❄</span>
+            <span class="cover-ornament top-right">❄</span>
+            <span class="cover-ornament bottom-left">🌟</span>
+            <span class="cover-ornament bottom-right">🌟</span>
+            
+            <div class="cover-title">
+                <h1>A Christmas Story</h1>
+                <div class="subtitle">— of Shapes & Wonder —</div>
             </div>
-            <div class="specs">
-                <strong>Shape Format:</strong><br>
-                • Height: 1.5" | Width: 2.3"<br>
-                • Style: Diagonal Gradient – Accent 6<br>
-                • Outline: 2½ pt | Shadow Style 9<br>
-                <strong>Text:</strong> 24pt Bold Goudy Stout, Black
+            
+            <div class="cover-illustration">🎄</div>
+            
+            <div class="cover-quote">
+                "In every shape of Christmas, there lives a story waiting to be told—<br>
+                of gifts given with love, of joy that lights the soul."
             </div>
         </div>
 
-        <!-- OVAL -->
-        <div class="shape-card">
-            <h3>OVAL</h3>
-            <div class="shape-display">
-                <div class="oval-shape">
-                    <div class="ornament-cap"></div>
-                    <div class="ornament-ball">
-                        <div class="ornament-shine"></div>
-                        <span class="ornament-text">OVAL</span>
-                    </div>
-                </div>
+        <!-- ==================== PAGE 1: THE GIFT (RECTANGLE) ==================== -->
+        <div class="book-page">
+            <span class="holly-corner tl">🍃</span>
+            <span class="holly-corner tr">🍃</span>
+            <span class="holly-corner bl">🍃</span>
+            <span class="holly-corner br">🍃</span>
+            
+            <div class="page-header">
+                <div class="chapter">Chapter One</div>
+                <h2>The Gift</h2>
             </div>
-            <div class="specs">
-                <strong>Shape Format:</strong><br>
-                • Height: 1.99" | Width: 2.58"<br>
-                • Style: Color Outline – Accent 5<br>
-                • 3-D Style 3 | Aqua Accent 5 Lighter 40%<br>
-                <strong>Text:</strong> 24pt Bold Goudy Stout, Black
-            </div>
-        </div>
-
-        <!-- TRIANGLE -->
-        <div class="shape-card">
-            <h3>TRIANGLE</h3>
-            <div class="shape-display">
-                <div class="triangle-shape">
-                    <div class="tree-star">⭐</div>
-                    <div class="tree-layer layer1"></div>
-                    <div class="tree-layer layer2"></div>
-                    <div class="tree-layer layer3"></div>
-                    <div class="tree-ornament"></div>
-                    <div class="tree-ornament"></div>
-                    <div class="tree-ornament"></div>
-                    <div class="tree-ornament"></div>
-                    <div class="tree-ornament"></div>
-                    <div class="tree-ornament"></div>
-                    <div class="tree-ornament"></div>
-                    <div class="tree-ornament"></div>
-                    <span class="tree-text">TRIANGLE</span>
-                    <div class="tree-trunk"></div>
-                </div>
-            </div>
-            <div class="specs">
-                <strong>Shape Format:</strong><br>
-                • Height: 2.63" | Width: 2.43"<br>
-                • Compound Outline – Accent 6<br>
-                • Shadow Style 10 | Purple Accent 4 Lighter 40%<br>
-                <strong>Text:</strong> 24pt Bold Goudy Stout, Black
-            </div>
-        </div>
-
-        <!-- SMILEY FACE -->
-        <div class="shape-card">
-            <h3>SMILEY FACE</h3>
-            <div class="shape-display">
-                <div class="smiley-shape">
-                    <div class="santa-hat">
-                        <div class="hat-pom"></div>
-                        <div class="hat-cone"></div>
-                        <div class="hat-base"></div>
-                    </div>
-                    <div class="santa-face">
-                        <div class="santa-eye left"></div>
-                        <div class="santa-eye right"></div>
-                        <div class="santa-nose"></div>
-                        <div class="santa-cheek left"></div>
-                        <div class="santa-cheek right"></div>
-                        <div class="santa-mouth"></div>
-                        <div class="santa-beard">
-                            <div class="beard-wave"></div>
-                            <div class="beard-wave"></div>
-                            <div class="beard-wave"></div>
-                            <div class="beard-wave"></div>
-                            <span class="santa-text">HO HO HO!</span>
+            
+            <div class="page-content">
+                <div class="shape-showcase">
+                    <div class="gift-box">
+                        <div class="gift-bow">
+                            <div class="bow-loop left"></div>
+                            <div class="bow-loop right"></div>
+                            <div class="bow-center"></div>
+                            <div class="bow-tail left"></div>
+                            <div class="bow-tail right"></div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="specs">
-                <strong>Shape Format:</strong><br>
-                • Height: 2.71" | Width: 3.08"<br>
-                • Fill: Yellow | Outline: Long Dash, Dark Blue<br>
-                • Shadow Style 10<br>
-                <strong>Text:</strong> 24pt Bold Goudy Stout, Black
-            </div>
-        </div>
-
-        <!-- HEART - PERFECT UPRIGHT -->
-        <div class="shape-card">
-            <h3>HEART</h3>
-            <div class="shape-display">
-                <div class="heart-shape">
-                    <div class="heart-bow">🎀</div>
-                    <div class="heart-container">
-                        <svg class="heart-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M50 88 C20 60, 0 40, 0 25 C0 10, 15 0, 25 0 C35 0, 45 8, 50 18 C55 8, 65 0, 75 0 C85 0, 100 10, 100 25 C100 40, 80 60, 50 88 Z" fill="url(#heartRadial)"/>
-                        </svg>
-                        <div class="heart-shine-svg"></div>
-                        <span class="heart-text-svg">HEART</span>
-                    </div>
-                    <div class="heart-shadow"></div>
+                
+                <div class="page-divider"></div>
+                
+                <p class="verse">
+                    Wrapped in crimson, tied with gold,<br>
+                    a <span class="highlight">rectangle</span> of wonders untold.<br>
+                    Not the ribbon, nor the bow so bright—<br>
+                    but the <span class="highlight">love within</span> that makes it right.
+                </p>
+                
+                <div class="message-box">
+                    <p>
+                        For it is in giving that we receive,<br>
+                        and in wrapping our hearts for those we believe.
+                    </p>
                 </div>
             </div>
-            <div class="specs">
-                <strong>Shape Format:</strong><br>
-                • Height: 3.44" | Width: 3.64"<br>
-                • Fill: Red | 3-D Style 12 Tilt Up, Surface Plastic<br>
-                • 3-D Color: Dark Red<br>
-                <strong>Text:</strong> 24pt Bold Goudy Stout, Black
-            </div>
+            
+            <span class="page-number left">— 1 —</span>
         </div>
-    </div>
 
-    <div class="footer">
-        <p>✨ Season's Greetings! ✨</p>
-        <p class="college">Imus Computer College since 1988</p>
+        <!-- ==================== PAGE 2: THE JOY (OVAL) ==================== -->
+        <div class="book-page">
+            <span class="holly-corner tl">🍃</span>
+            <span class="holly-corner tr">🍃</span>
+            <span class="holly-corner bl">🍃</span>
+            <span class="holly-corner br">🍃</span>
+            
+            <div class="page-header">
+                <div class="chapter">Chapter Two</div>
+                <h2>The Joy</h2>
+            </div>
+            
+            <div class="page-content">
+                <div class="shape-showcase">
+                    <div class="ornament-display">
+                        <div class="orn-string"></div>
+                        <div class="orn-cap"></div>
+                        <div class="orn-ball">
+                            <div class="orn-shine"></div>
+                            <div class="orn-pattern">❄</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="page-divider"></div>
+                
+                <p class="verse">
+                    An <span class="highlight">oval</span> of glass, reflecting light,<br>
+                    hanging gently through the silent night.<br>
+                    Each ornament holds a <span class="highlight">memory dear</span>—<br>
+                    of laughter shared and those held near.
+                </p>
+                
+                <div class="message-box">
+                    <p>
+                        Joy multiplies when it is shared,<br>
+                        like ornaments showing that someone cared.
+                    </p>
+                </div>
+            </div>
+            
+            <span class="page-number right">— 2 —</span>
+        </div>
+
+        <!-- ==================== PAGE 3: THE HOPE (TRIANGLE) ==================== -->
+        <div class="book-page">
+            <span class="holly-corner tl">🍃</span>
+            <span class="holly-corner tr">🍃</span>
+            <span class="holly-corner bl">🍃</span>
+            <span class="holly-corner br">🍃</span>
+            
+            <div class="page-header">
+                <div class="chapter">Chapter Three</div>
+                <h2>The Hope</h2>
+            </div>
+            
+            <div class="page-content">
+                <div class="shape-showcase">
+                    <div class="christmas-tree">
+                        <div class="tree-star">⭐</div>
+                        <div class="tree-tier t1"></div>
+                        <div class="tree-tier t2"></div>
+                        <div class="tree-tier t3"></div>
+                        <div class="tree-bauble b1"></div>
+                        <div class="tree-bauble b2"></div>
+                        <div class="tree-bauble b3"></div>
+                        <div class="tree-bauble b4"></div>
+                        <div class="tree-bauble b5"></div>
+                        <div class="tree-bauble b6"></div>
+                        <div class="tree-bauble b7"></div>
+                        <div class="tree-bauble b8"></div>
+                        <div class="tree-trunk-display"></div>
+                    </div>
+                </div>
+                
+                <div class="page-divider"></div>
+                
+                <p class="verse">
+                    Rising upward, <span class="highlight">triangle</span> so grand,<br>
+                    the evergreen tree makes its stand.<br>
+                    A star atop whispers of <span class="highlight">hope</span> so true—<br>
+                    that light will come and darkness subdue.
+                </p>
+                
+                <div class="message-box">
+                    <p>
+                        Like the tree that stays green through winter's cold,<br>
+                        hope remains in every heart that's bold.
+                    </p>
+                </div>
+            </div>
+            
+            <span class="page-number left">— 3 —</span>
+        </div>
+
+        <!-- ==================== PAGE 4: THE SPIRIT (SMILEY/SANTA) ==================== -->
+        <div class="book-page">
+            <span class="holly-corner tl">🍃</span>
+            <span class="holly-corner tr">🍃</span>
+            <span class="holly-corner bl">🍃</span>
+            <span class="holly-corner br">🍃</span>
+            
+            <div class="page-header">
+                <div class="chapter">Chapter Four</div>
+                <h2>The Spirit</h2>
+            </div>
+            
+            <div class="page-content">
+                <div class="shape-showcase">
+                    <div class="santa-display">
+                        <div class="santa-hat-display">
+                            <div class="hat-pom"></div>
+                            <div class="hat-body"></div>
+                            <div class="hat-rim"></div>
+                        </div>
+                        <div class="santa-face-display">
+                            <div class="santa-eye-display left"></div>
+                            <div class="santa-eye-display right"></div>
+                            <div class="santa-nose-display"></div>
+                            <div class="santa-cheek-display left"></div>
+                            <div class="santa-cheek-display right"></div>
+                            <div class="santa-smile"></div>
+                            <div class="santa-beard-display">
+                                <div class="beard-curl"></div>
+                                <div class="beard-curl"></div>
+                                <div class="beard-curl"></div>
+                                <div class="beard-curl"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="page-divider"></div>
+                
+                <p class="verse">
+                    A jolly <span class="highlight">smile</span>, a hearty cheer,<br>
+                    the spirit of Christmas draws ever near.<br>
+                    In giving ourselves, we find what's real—<br>
+                    the <span class="highlight">warmth of kindness</span> we all can feel.
+                </p>
+                
+                <div class="message-box">
+                    <p>
+                        Ho ho ho! rings through the night,<br>
+                        reminding us to spread delight.
+                    </p>
+                </div>
+            </div>
+            
+            <span class="page-number right">— 4 —</span>
+        </div>
+
+        <!-- ==================== PAGE 5: THE LOVE (HEART) ==================== -->
+        <div class="book-page">
+            <span class="holly-corner tl">🍃</span>
+            <span class="holly-corner tr">🍃</span>
+            <span class="holly-corner bl">🍃</span>
+            <span class="holly-corner br">🍃</span>
+            
+            <div class="page-header">
+                <div class="chapter">Chapter Five</div>
+                <h2>The Love</h2>
+            </div>
+            
+            <div class="page-content">
+                <div class="shape-showcase">
+                    <div class="heart-display">
+                        <div class="heart-ribbon">🎀</div>
+                        <div class="heart-svg-container">
+                            <svg class="heart-svg-main" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M50 88 C20 60, 0 40, 0 25 C0 10, 15 0, 25 0 C35 0, 45 8, 50 18 C55 8, 65 0, 75 0 C85 0, 100 10, 100 25 C100 40, 80 60, 50 88 Z" fill="url(#heartRadialMain)"/>
+                            </svg>
+                            <div class="heart-glow"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="page-divider"></div>
+                
+                <p class="verse">
+                    At the center of all, a <span class="highlight">heart</span> beats true,<br>
+                    the shape of love in all that we do.<br>
+                    Christmas reminds us what matters most—<br>
+                    <span class="highlight">love for each other</span>, from coast to coast.
+                </p>
+                
+                <div class="message-box">
+                    <p>
+                        For God so loved the world, He gave,<br>
+                        a gift of love, our souls to save.
+                    </p>
+                </div>
+            </div>
+            
+            <span class="page-number left">— 5 —</span>
+        </div>
+
+        <!-- ==================== FINAL PAGE ==================== -->
+        <div class="final-page">
+            <h2>The End</h2>
+            
+            <p class="final-verse">
+                Five shapes of Christmas, each one divine—<br>
+                The Gift, The Joy, The Hope that shines,<br>
+                The Spirit of giving, The Love so pure,<br>
+                May these blessings within you forever endure.
+            </p>
+            
+            <div class="final-shapes">
+                <span>🎁</span>
+                <span>🔴</span>
+                <span>🎄</span>
+                <span>🎅</span>
+                <span>❤️</span>
+            </div>
+            
+            <p class="final-verse" style="font-size: 20px;">
+                ✨ Merry Christmas & Happy New Year ✨
+            </p>
+            
+            <p class="footer-credit">
+                Imus Computer College since 1988<br>
+                — Activity 2.0 —
+            </p>
+        </div>
+
     </div>
 </body>
 </html>
