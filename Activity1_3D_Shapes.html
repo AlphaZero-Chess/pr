@@ -78,7 +78,7 @@
             perspective: 1000px;
         }
         
-        /* ==================== CUBE ==================== */
+        /* ==================== CUBE - PERFECT REFERENCE ==================== */
         .cube-scene {
             width: 150px;
             height: 150px;
@@ -144,296 +144,67 @@
             transform: rotateX(-90deg) translateZ(75px);
         }
         
-        /* ==================== TRIANGULAR PYRAMID - SEAMLESS SOLID ==================== */
+        /* ==================== TRIANGULAR PYRAMID - SVG SEAMLESS ==================== */
         .pyramid-tri-wrapper {
-            width: 200px;
-            height: 220px;
-            perspective: 800px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .pyramid-tri {
-            width: 180px;
-            height: 180px;
-            position: relative;
-            transform-style: preserve-3d;
-            transform: rotateX(-25deg) rotateY(-30deg);
-            animation: pyramidRotate 25s infinite linear;
-        }
-        
-        @keyframes pyramidRotate {
-            0% { transform: rotateX(-25deg) rotateY(0deg); }
-            100% { transform: rotateX(-25deg) rotateY(360deg); }
-        }
-        
-        /* Tetrahedron using CSS 3D with connected faces */
-        .tetra-face {
-            position: absolute;
-            width: 0;
-            height: 0;
-            transform-style: preserve-3d;
-        }
-        
-        /* Using border technique for seamless triangles */
-        .tetra-face-1 {
-            border-left: 65px solid transparent;
-            border-right: 65px solid transparent;
-            border-bottom: 120px solid rgba(231, 76, 60, 0.95);
-            left: 25px;
-            top: 30px;
-            transform: rotateX(30deg) translateZ(38px);
-            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
-        }
-        
-        .tetra-face-2 {
-            border-left: 65px solid transparent;
-            border-right: 65px solid transparent;
-            border-bottom: 120px solid rgba(192, 57, 43, 0.95);
-            left: 25px;
-            top: 30px;
-            transform: rotateY(120deg) rotateX(30deg) translateZ(38px);
-            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.4));
-        }
-        
-        .tetra-face-3 {
-            border-left: 65px solid transparent;
-            border-right: 65px solid transparent;
-            border-bottom: 120px solid rgba(255, 107, 107, 0.95);
-            left: 25px;
-            top: 30px;
-            transform: rotateY(240deg) rotateX(30deg) translateZ(38px);
-            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
-        }
-        
-        .tetra-base {
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-left: 65px solid transparent;
-            border-right: 65px solid transparent;
-            border-bottom: 113px solid rgba(146, 43, 33, 0.95);
-            left: 25px;
-            top: 30px;
-            transform: rotateX(90deg) translateZ(-65px) rotateZ(60deg);
-        }
-        
-        /* ==================== CYLINDER - PROPER 3D ==================== */
-        .cylinder-wrapper {
-            width: 200px;
-            height: 240px;
-            perspective: 1000px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .cylinder-3d {
-            position: relative;
-            width: 160px;
-            height: 200px;
-            transform-style: preserve-3d;
-            transform: rotateX(-20deg) rotateY(-15deg);
-            animation: cylinderRotate 18s infinite linear;
-        }
-        
-        @keyframes cylinderRotate {
-            0% { transform: rotateX(-20deg) rotateY(0deg); }
-            100% { transform: rotateX(-20deg) rotateY(360deg); }
-        }
-        
-        /* Create cylinder body with multiple slices for 3D effect */
-        .cylinder-slice {
-            position: absolute;
-            width: 120px;
-            height: 4px;
-            left: 20px;
-            border-radius: 50%;
-            transform-style: preserve-3d;
-        }
-        
-        .cylinder-body-wrapper {
-            position: absolute;
-            width: 120px;
-            height: 160px;
-            left: 20px;
-            top: 20px;
-            transform-style: preserve-3d;
-        }
-        
-        /* Generate cylinder body segments */
-        .cyl-segment {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            left: 0;
-            top: 0;
-            transform-style: preserve-3d;
-        }
-        
-        .cyl-face {
-            position: absolute;
-            width: 2px;
-            height: 160px;
-            transform-origin: center center;
-        }
-        
-        /* Create the curved surface illusion with gradient */
-        .cylinder-surface {
-            position: absolute;
-            width: 120px;
-            height: 160px;
-            left: 20px;
-            top: 20px;
-            background: linear-gradient(90deg, 
-                rgba(20, 90, 50, 0.9) 0%, 
-                rgba(30, 132, 73, 0.95) 15%, 
-                rgba(46, 204, 113, 1) 35%, 
-                rgba(88, 214, 141, 1) 50%, 
-                rgba(46, 204, 113, 1) 65%, 
-                rgba(30, 132, 73, 0.95) 85%, 
-                rgba(20, 90, 50, 0.9) 100%);
-            border-radius: 60px / 20px;
-            box-shadow: 
-                inset -30px 0 50px rgba(0,0,0,0.3),
-                inset 30px 0 50px rgba(255,255,255,0.1);
-        }
-        
-        .cylinder-top-cap {
-            position: absolute;
-            width: 120px;
-            height: 40px;
-            left: 20px;
-            top: 0;
-            background: linear-gradient(135deg, 
-                rgba(88, 214, 141, 1) 0%, 
-                rgba(46, 204, 113, 1) 40%, 
-                rgba(39, 174, 96, 0.95) 100%);
-            border-radius: 50%;
-            border: 2px solid rgba(30, 132, 73, 0.8);
-            transform: rotateX(70deg) translateZ(0px);
-            box-shadow: 
-                inset 10px 5px 20px rgba(255,255,255,0.4),
-                inset -10px -5px 20px rgba(0,0,0,0.2),
-                0 5px 15px rgba(0,0,0,0.3);
-        }
-        
-        .cylinder-bottom-cap {
-            position: absolute;
-            width: 120px;
-            height: 40px;
-            left: 20px;
-            bottom: 0;
-            background: linear-gradient(135deg, 
-                rgba(20, 90, 50, 0.95) 0%, 
-                rgba(30, 132, 73, 0.95) 100%);
-            border-radius: 50%;
-            border: 2px solid rgba(20, 90, 50, 0.9);
-            transform: rotateX(70deg) translateZ(0px);
-            box-shadow: inset 0 -5px 15px rgba(0,0,0,0.4);
-        }
-        
-        .cylinder-edge-left {
-            position: absolute;
-            width: 4px;
-            height: 160px;
-            left: 18px;
-            top: 20px;
-            background: linear-gradient(180deg,
-                rgba(20, 90, 50, 0.9) 0%,
-                rgba(30, 100, 60, 0.95) 50%,
-                rgba(20, 90, 50, 0.9) 100%);
-            border-radius: 2px;
-        }
-        
-        .cylinder-edge-right {
-            position: absolute;
-            width: 4px;
-            height: 160px;
-            right: 38px;
-            top: 20px;
-            background: linear-gradient(180deg,
-                rgba(88, 214, 141, 0.8) 0%,
-                rgba(70, 200, 120, 0.9) 50%,
-                rgba(88, 214, 141, 0.8) 100%);
-            border-radius: 2px;
-        }
-        
-        /* ==================== SQUARE PYRAMID - FIXED ==================== */
-        .pyramid-sq-wrapper {
             width: 220px;
             height: 240px;
-            perspective: 800px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
         
-        .pyramid-sq {
-            position: relative;
+        .tetrahedron-svg {
             width: 200px;
             height: 200px;
-            transform-style: preserve-3d;
-            transform: rotateX(-20deg) rotateY(-45deg);
-            animation: sqPyramidRotate 22s infinite linear;
+            animation: tetraRotate 20s infinite linear;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4));
         }
         
-        @keyframes sqPyramidRotate {
-            0% { transform: rotateX(-20deg) rotateY(0deg); }
-            100% { transform: rotateX(-20deg) rotateY(360deg); }
+        @keyframes tetraRotate {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
         }
         
-        /* Square pyramid with proper connected faces */
-        .sq-pyr-face {
-            position: absolute;
-            width: 120px;
-            height: 130px;
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            transform-origin: bottom center;
+        /* ==================== CYLINDER - SVG SEAMLESS ==================== */
+        .cylinder-wrapper {
+            width: 200px;
+            height: 260px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
-        .sq-pyr-face-1 {
-            background: linear-gradient(180deg, rgba(155, 89, 182, 0.95) 0%, rgba(142, 68, 173, 0.95) 100%);
-            left: 40px;
-            top: 15px;
-            transform: rotateX(26deg) translateZ(60px);
-            box-shadow: inset 0 -30px 40px rgba(0,0,0,0.3);
+        .cylinder-svg {
+            width: 180px;
+            height: 220px;
+            animation: cylRotate 18s infinite linear;
+            filter: drop-shadow(0 10px 25px rgba(0,0,0,0.4));
         }
         
-        .sq-pyr-face-2 {
-            background: linear-gradient(180deg, rgba(142, 68, 173, 0.95) 0%, rgba(125, 60, 152, 0.95) 100%);
-            left: 40px;
-            top: 15px;
-            transform: rotateY(90deg) rotateX(26deg) translateZ(60px);
-            box-shadow: inset 0 -30px 40px rgba(0,0,0,0.4);
+        @keyframes cylRotate {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
         }
         
-        .sq-pyr-face-3 {
-            background: linear-gradient(180deg, rgba(125, 60, 152, 0.95) 0%, rgba(108, 52, 131, 0.95) 100%);
-            left: 40px;
-            top: 15px;
-            transform: rotateY(180deg) rotateX(26deg) translateZ(60px);
-            box-shadow: inset 0 -30px 40px rgba(0,0,0,0.35);
+        /* ==================== SQUARE PYRAMID - SVG SEAMLESS ==================== */
+        .pyramid-sq-wrapper {
+            width: 220px;
+            height: 260px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
-        .sq-pyr-face-4 {
-            background: linear-gradient(180deg, rgba(165, 105, 189, 0.95) 0%, rgba(155, 89, 182, 0.95) 100%);
-            left: 40px;
-            top: 15px;
-            transform: rotateY(270deg) rotateX(26deg) translateZ(60px);
-            box-shadow: inset 0 -30px 40px rgba(0,0,0,0.25);
+        .sq-pyramid-svg {
+            width: 200px;
+            height: 220px;
+            animation: sqPyrRotate 22s infinite linear;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4));
         }
         
-        .sq-pyr-base {
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, rgba(108, 52, 131, 0.95) 0%, rgba(74, 35, 90, 0.95) 100%);
-            left: 40px;
-            top: 145px;
-            transform: rotateX(90deg) translateZ(-60px);
-            box-shadow: inset 0 0 30px rgba(0,0,0,0.4);
+        @keyframes sqPyrRotate {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
         }
         
         .footer {
@@ -451,13 +222,76 @@
     </style>
 </head>
 <body>
+    <!-- SVG Definitions -->
+    <svg width="0" height="0" style="position:absolute;">
+        <defs>
+            <!-- Tetrahedron gradients -->
+            <linearGradient id="tetraGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#e74c3c;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#c0392b;stop-opacity:1" />
+            </linearGradient>
+            <linearGradient id="tetraGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#c0392b;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#922b21;stop-opacity:1" />
+            </linearGradient>
+            <linearGradient id="tetraGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#e74c3c;stop-opacity:1" />
+            </linearGradient>
+            <linearGradient id="tetraBase" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#7b241c;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#641e16;stop-opacity:1" />
+            </linearGradient>
+            
+            <!-- Cylinder gradients -->
+            <linearGradient id="cylBody" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#145a32;stop-opacity:1" />
+                <stop offset="20%" style="stop-color:#1e8449;stop-opacity:1" />
+                <stop offset="50%" style="stop-color:#2ecc71;stop-opacity:1" />
+                <stop offset="80%" style="stop-color:#1e8449;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#145a32;stop-opacity:1" />
+            </linearGradient>
+            <radialGradient id="cylTop" cx="40%" cy="40%" r="60%">
+                <stop offset="0%" style="stop-color:#58d68d;stop-opacity:1" />
+                <stop offset="50%" style="stop-color:#2ecc71;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#1e8449;stop-opacity:1" />
+            </radialGradient>
+            <radialGradient id="cylBottom" cx="50%" cy="50%" r="60%">
+                <stop offset="0%" style="stop-color:#1e8449;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#0e5a2a;stop-opacity:1" />
+            </radialGradient>
+            
+            <!-- Square Pyramid gradients -->
+            <linearGradient id="sqPyrGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#9b59b6;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#8e44ad;stop-opacity:1" />
+            </linearGradient>
+            <linearGradient id="sqPyrGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#8e44ad;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#7d3c98;stop-opacity:1" />
+            </linearGradient>
+            <linearGradient id="sqPyrGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#7d3c98;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#6c3483;stop-opacity:1" />
+            </linearGradient>
+            <linearGradient id="sqPyrGrad4" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#a569bd;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#9b59b6;stop-opacity:1" />
+            </linearGradient>
+            <linearGradient id="sqPyrBase" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#5b2c6f;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#4a235a;stop-opacity:1" />
+            </linearGradient>
+        </defs>
+    </svg>
+
     <div class="header">
         <h1>ACTIVITY 1.0</h1>
         <p>Create the following 3D shapes: Cube, Triangular Base Pyramid, Cylinder, Square Base Pyramid</p>
     </div>
 
     <div class="shapes-grid">
-        <!-- CUBE -->
+        <!-- CUBE - PERFECT REFERENCE -->
         <div class="shape-card">
             <h2>CUBE</h2>
             <div class="shape-container">
@@ -474,49 +308,68 @@
             </div>
         </div>
 
-        <!-- TRIANGULAR BASE PYRAMID -->
+        <!-- TRIANGULAR BASE PYRAMID (TETRAHEDRON) - SVG SEAMLESS -->
         <div class="shape-card">
             <h2>TRIANGULAR BASE PYRAMID</h2>
             <div class="shape-container">
                 <div class="pyramid-tri-wrapper">
-                    <div class="pyramid-tri">
-                        <div class="tetra-face tetra-face-1"></div>
-                        <div class="tetra-face tetra-face-2"></div>
-                        <div class="tetra-face tetra-face-3"></div>
-                        <div class="tetra-base"></div>
-                    </div>
+                    <svg class="tetrahedron-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Tetrahedron - 3D isometric view with 4 triangular faces -->
+                        <!-- Apex at top, triangular base below -->
+                        <!-- Front face (triangle from apex to front edge of base) -->
+                        <polygon points="100,25 45,155 155,155" fill="url(#tetraGrad1)" stroke="#c0392b" stroke-width="1"/>
+                        <!-- Left face (triangle from apex to left-back corner of base) -->
+                        <polygon points="100,25 45,155 100,185" fill="url(#tetraGrad2)" stroke="#922b21" stroke-width="1"/>
+                        <!-- Right face (triangle from apex to right-back corner of base) -->
+                        <polygon points="100,25 155,155 100,185" fill="url(#tetraGrad3)" stroke="#e74c3c" stroke-width="1"/>
+                        <!-- Triangular base (3 corners) -->
+                        <polygon points="45,155 155,155 100,185" fill="url(#tetraBase)" stroke="#7b241c" stroke-width="1"/>
+                    </svg>
                 </div>
             </div>
         </div>
 
-        <!-- CYLINDER -->
+        <!-- CYLINDER - SVG SEAMLESS -->
         <div class="shape-card">
             <h2>CYLINDER</h2>
             <div class="shape-container">
                 <div class="cylinder-wrapper">
-                    <div class="cylinder-3d">
-                        <div class="cylinder-top-cap"></div>
-                        <div class="cylinder-surface"></div>
-                        <div class="cylinder-edge-left"></div>
-                        <div class="cylinder-edge-right"></div>
-                        <div class="cylinder-bottom-cap"></div>
-                    </div>
+                    <svg class="cylinder-svg" viewBox="0 0 180 220" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Cylinder body (rectangular with curved gradient) -->
+                        <rect x="30" y="40" width="120" height="140" fill="url(#cylBody)"/>
+                        <!-- Left edge -->
+                        <line x1="30" y1="40" x2="30" y2="180" stroke="#0e5a2a" stroke-width="2"/>
+                        <!-- Right edge -->
+                        <line x1="150" y1="40" x2="150" y2="180" stroke="#58d68d" stroke-width="2"/>
+                        <!-- Bottom ellipse -->
+                        <ellipse cx="90" cy="180" rx="60" ry="20" fill="url(#cylBottom)" stroke="#0e5a2a" stroke-width="2"/>
+                        <!-- Top ellipse (over body) -->
+                        <ellipse cx="90" cy="40" rx="60" ry="20" fill="url(#cylTop)" stroke="#1e8449" stroke-width="2"/>
+                        <!-- Top highlight -->
+                        <ellipse cx="80" cy="35" rx="25" ry="8" fill="rgba(255,255,255,0.25)"/>
+                    </svg>
                 </div>
             </div>
         </div>
 
-        <!-- SQUARE BASE PYRAMID -->
+        <!-- SQUARE BASE PYRAMID - SVG SEAMLESS -->
         <div class="shape-card">
             <h2>SQUARE BASE PYRAMID</h2>
             <div class="shape-container">
                 <div class="pyramid-sq-wrapper">
-                    <div class="pyramid-sq">
-                        <div class="sq-pyr-face sq-pyr-face-1"></div>
-                        <div class="sq-pyr-face sq-pyr-face-2"></div>
-                        <div class="sq-pyr-face sq-pyr-face-3"></div>
-                        <div class="sq-pyr-face sq-pyr-face-4"></div>
-                        <div class="sq-pyr-base"></div>
-                    </div>
+                    <svg class="sq-pyramid-svg" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Square pyramid - isometric view with all faces connected -->
+                        <!-- Base (parallelogram for 3D effect) -->
+                        <polygon points="40,160 100,200 160,160 100,120" fill="url(#sqPyrBase)" stroke="#4a235a" stroke-width="1"/>
+                        <!-- Front left face -->
+                        <polygon points="100,30 40,160 100,200" fill="url(#sqPyrGrad2)" stroke="#7d3c98" stroke-width="1"/>
+                        <!-- Front right face -->
+                        <polygon points="100,30 100,200 160,160" fill="url(#sqPyrGrad1)" stroke="#8e44ad" stroke-width="1"/>
+                        <!-- Back left face (partially visible) -->
+                        <polygon points="100,30 100,120 40,160" fill="url(#sqPyrGrad3)" stroke="#6c3483" stroke-width="1"/>
+                        <!-- Back right face (partially visible) -->
+                        <polygon points="100,30 160,160 100,120" fill="url(#sqPyrGrad4)" stroke="#9b59b6" stroke-width="1"/>
+                    </svg>
                 </div>
             </div>
         </div>
