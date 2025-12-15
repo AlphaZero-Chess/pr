@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACTIVITY 1.0 - Professional 3D Shapes</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            padding: 60px 40px;
+            color: #fff;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        
+        .header p {
+            font-size: 18px;
+            color: #a0a0a0;
+            font-weight: 300;
+        }
+        
+        .shapes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 50px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .shape-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        
+        .shape-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px rgba(102, 126, 234, 0.2);
+        }
+        
+        .shape-card h2 {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 30px;
+            letter-spacing: 3px;
+        }
+        
+        .shape-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 280px;
+            perspective: 1000px;
+        }
+        
+        /* ==================== CUBE ==================== */
+        .cube-scene {
+            width: 150px;
+            height: 150px;
+            perspective: 600px;
+        }
+        
+        .cube {
+            width: 150px;
+            height: 150px;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateX(-20deg) rotateY(-30deg);
+            animation: cubeRotate 20s infinite linear;
+        }
+        
+        @keyframes cubeRotate {
+            0% { transform: rotateX(-20deg) rotateY(0deg); }
+            100% { transform: rotateX(-20deg) rotateY(360deg); }
+        }
+        
+        .cube-face {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border: 2px solid rgba(102, 126, 234, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.9);
+            letter-spacing: 1px;
+            backface-visibility: visible;
+        }
+        
+        .cube-face.front {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.7) 0%, rgba(118, 75, 162, 0.7) 100%);
+            transform: rotateY(0deg) translateZ(75px);
+        }
+        
+        .cube-face.back {
+            background: linear-gradient(135deg, rgba(118, 75, 162, 0.7) 0%, rgba(102, 126, 234, 0.7) 100%);
+            transform: rotateY(180deg) translateZ(75px);
+        }
+        
+        .cube-face.right {
+            background: linear-gradient(135deg, rgba(240, 147, 251, 0.7) 0%, rgba(118, 75, 162, 0.7) 100%);
+            transform: rotateY(90deg) translateZ(75px);
+        }
+        
+        .cube-face.left {
+            background: linear-gradient(135deg, rgba(118, 75, 162, 0.7) 0%, rgba(240, 147, 251, 0.7) 100%);
+            transform: rotateY(-90deg) translateZ(75px);
+        }
+        
+        .cube-face.top {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(240, 147, 251, 0.9) 100%);
+            transform: rotateX(90deg) translateZ(75px);
+        }
+        
+        .cube-face.bottom {
+            background: linear-gradient(135deg, rgba(60, 60, 100, 0.9) 0%, rgba(40, 40, 80, 0.9) 100%);
+            transform: rotateX(-90deg) translateZ(75px);
+        }
+        
+        /* ==================== TRIANGULAR PYRAMID ==================== */
+        .pyramid-tri-scene {
+            width: 200px;
+            height: 200px;
+            perspective: 800px;
+        }
+        
+        .pyramid-tri {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateX(-15deg) rotateY(-30deg);
+            animation: pyramidRotate 25s infinite linear;
+        }
+        
+        @keyframes pyramidRotate {
+            0% { transform: rotateX(-15deg) rotateY(0deg); }
+            100% { transform: rotateX(-15deg) rotateY(360deg); }
+        }
+        
+        .pyramid-tri-face {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            transform-origin: center bottom;
+        }
+        
+        .pyramid-tri-face.face1 {
+            border-width: 0 70px 140px 70px;
+            border-color: transparent transparent rgba(231, 76, 60, 0.85) transparent;
+            left: 30px;
+            top: 10px;
+            transform: rotateX(30deg) rotateY(0deg) translateZ(40px);
+        }
+        
+        .pyramid-tri-face.face2 {
+            border-width: 0 70px 140px 70px;
+            border-color: transparent transparent rgba(192, 57, 43, 0.85) transparent;
+            left: 30px;
+            top: 10px;
+            transform: rotateX(30deg) rotateY(120deg) translateZ(40px);
+        }
+        
+        .pyramid-tri-face.face3 {
+            border-width: 0 70px 140px 70px;
+            border-color: transparent transparent rgba(255, 107, 107, 0.85) transparent;
+            left: 30px;
+            top: 10px;
+            transform: rotateX(30deg) rotateY(240deg) translateZ(40px);
+        }
+        
+        .pyramid-tri-base {
+            position: absolute;
+            width: 120px;
+            height: 104px;
+            background: linear-gradient(135deg, rgba(146, 43, 33, 0.9) 0%, rgba(100, 30, 22, 0.9) 100%);
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            left: 40px;
+            top: 150px;
+            transform: rotateX(90deg) translateY(-30px);
+        }
+        
+        /* ==================== CYLINDER ==================== */
+        .cylinder-scene {
+            width: 160px;
+            height: 220px;
+            perspective: 800px;
+        }
+        
+        .cylinder {
+            width: 160px;
+            height: 200px;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateX(-20deg) rotateY(-20deg);
+            animation: cylinderRotate 18s infinite linear;
+        }
+        
+        @keyframes cylinderRotate {
+            0% { transform: rotateX(-20deg) rotateY(0deg); }
+            100% { transform: rotateX(-20deg) rotateY(360deg); }
+        }
+        
+        .cylinder-body {
+            position: absolute;
+            width: 140px;
+            height: 160px;
+            left: 10px;
+            top: 20px;
+            border-radius: 70px / 25px;
+            background: linear-gradient(90deg, 
+                rgba(30, 132, 73, 0.6) 0%, 
+                rgba(39, 174, 96, 0.8) 25%, 
+                rgba(46, 204, 113, 0.9) 50%, 
+                rgba(39, 174, 96, 0.8) 75%, 
+                rgba(30, 132, 73, 0.6) 100%);
+            transform-style: preserve-3d;
+        }
+        
+        .cylinder-top {
+            position: absolute;
+            width: 140px;
+            height: 50px;
+            left: 10px;
+            top: 0;
+            background: linear-gradient(135deg, rgba(88, 214, 141, 0.95) 0%, rgba(46, 204, 113, 0.95) 50%, rgba(39, 174, 96, 0.95) 100%);
+            border-radius: 50%;
+            border: 2px solid rgba(30, 132, 73, 0.8);
+            transform: rotateX(90deg) translateZ(80px);
+            box-shadow: inset 0 0 30px rgba(255,255,255,0.2);
+        }
+        
+        .cylinder-bottom {
+            position: absolute;
+            width: 140px;
+            height: 50px;
+            left: 10px;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(20, 90, 50, 0.95) 0%, rgba(30, 132, 73, 0.95) 100%);
+            border-radius: 50%;
+            transform: rotateX(90deg) translateZ(-80px);
+        }
+        
+        /* ==================== SQUARE PYRAMID ==================== */
+        .pyramid-sq-scene {
+            width: 200px;
+            height: 220px;
+            perspective: 800px;
+        }
+        
+        .pyramid-sq {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateX(-20deg) rotateY(-45deg);
+            animation: sqPyramidRotate 22s infinite linear;
+        }
+        
+        @keyframes sqPyramidRotate {
+            0% { transform: rotateX(-20deg) rotateY(0deg); }
+            100% { transform: rotateX(-20deg) rotateY(360deg); }
+        }
+        
+        .pyramid-sq-face {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            transform-origin: center bottom;
+        }
+        
+        .pyramid-sq-face.sq-face1 {
+            border-width: 0 60px 130px 60px;
+            border-color: transparent transparent rgba(155, 89, 182, 0.85) transparent;
+            left: 40px;
+            top: 15px;
+            transform: rotateX(32deg) rotateY(0deg) translateZ(60px);
+        }
+        
+        .pyramid-sq-face.sq-face2 {
+            border-width: 0 60px 130px 60px;
+            border-color: transparent transparent rgba(142, 68, 173, 0.85) transparent;
+            left: 40px;
+            top: 15px;
+            transform: rotateX(32deg) rotateY(90deg) translateZ(60px);
+        }
+        
+        .pyramid-sq-face.sq-face3 {
+            border-width: 0 60px 130px 60px;
+            border-color: transparent transparent rgba(125, 60, 152, 0.85) transparent;
+            left: 40px;
+            top: 15px;
+            transform: rotateX(32deg) rotateY(180deg) translateZ(60px);
+        }
+        
+        .pyramid-sq-face.sq-face4 {
+            border-width: 0 60px 130px 60px;
+            border-color: transparent transparent rgba(165, 105, 189, 0.85) transparent;
+            left: 40px;
+            top: 15px;
+            transform: rotateX(32deg) rotateY(270deg) translateZ(60px);
+        }
+        
+        .pyramid-sq-base {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, rgba(108, 52, 131, 0.95) 0%, rgba(74, 35, 90, 0.95) 100%);
+            left: 40px;
+            top: 145px;
+            transform: rotateX(90deg) translateZ(-60px);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .footer p {
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>ACTIVITY 1.0</h1>
+        <p>Create the following 3D shapes: Cube, Triangular Base Pyramid, Cylinder, Square Base Pyramid</p>
+    </div>
+
+    <div class="shapes-grid">
+        <!-- CUBE -->
+        <div class="shape-card">
+            <h2>CUBE</h2>
+            <div class="shape-container">
+                <div class="cube-scene">
+                    <div class="cube">
+                        <div class="cube-face front">FRONT</div>
+                        <div class="cube-face back">BACK</div>
+                        <div class="cube-face right">RIGHT</div>
+                        <div class="cube-face left">LEFT</div>
+                        <div class="cube-face top">TOP</div>
+                        <div class="cube-face bottom">BOTTOM</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TRIANGULAR BASE PYRAMID -->
+        <div class="shape-card">
+            <h2>TRIANGULAR BASE PYRAMID</h2>
+            <div class="shape-container">
+                <div class="pyramid-tri-scene">
+                    <div class="pyramid-tri">
+                        <div class="pyramid-tri-face face1"></div>
+                        <div class="pyramid-tri-face face2"></div>
+                        <div class="pyramid-tri-face face3"></div>
+                        <div class="pyramid-tri-base"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CYLINDER -->
+        <div class="shape-card">
+            <h2>CYLINDER</h2>
+            <div class="shape-container">
+                <div class="cylinder-scene">
+                    <div class="cylinder">
+                        <div class="cylinder-top"></div>
+                        <div class="cylinder-body"></div>
+                        <div class="cylinder-bottom"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SQUARE BASE PYRAMID -->
+        <div class="shape-card">
+            <h2>SQUARE BASE PYRAMID</h2>
+            <div class="shape-container">
+                <div class="pyramid-sq-scene">
+                    <div class="pyramid-sq">
+                        <div class="pyramid-sq-face sq-face1"></div>
+                        <div class="pyramid-sq-face sq-face2"></div>
+                        <div class="pyramid-sq-face sq-face3"></div>
+                        <div class="pyramid-sq-face sq-face4"></div>
+                        <div class="pyramid-sq-base"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Imus Computer College since 1988</p>
+    </div>
+</body>
+</html>

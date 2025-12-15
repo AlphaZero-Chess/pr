@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACTIVITY 2.0 - Christmas Themed Shapes</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(180deg, #0d4f2b 0%, #145a32 30%, #1a6b3c 50%, #145a32 70%, #0d4f2b 100%);
+            min-height: 100vh;
+            padding: 40px 20px 60px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Elegant Snowfall */
+        .snow-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .snowflake {
+            position: absolute;
+            top: -20px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            animation: snowfall linear infinite;
+            text-shadow: 0 0 5px rgba(255,255,255,0.5);
+        }
+        
+        @keyframes snowfall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0.3; }
+        }
+        
+        /* Top Garland */
+        .garland {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, transparent 100%);
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 5px;
+        }
+        
+        .garland-content {
+            display: flex;
+            gap: 30px;
+            font-size: 28px;
+        }
+        
+        .header {
+            text-align: center;
+            margin: 50px 0 40px;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 40px rgba(255,215,0,0.3);
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 20px;
+            color: #98FB98;
+            font-weight: 400;
+        }
+        
+        /* Christmas Banner */
+        .christmas-banner {
+            max-width: 500px;
+            margin: 25px auto;
+            background: linear-gradient(90deg, transparent, #c41e3a 10%, #c41e3a 90%, transparent);
+            padding: 12px 40px;
+            position: relative;
+        }
+        
+        .christmas-banner::before,
+        .christmas-banner::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+        
+        .christmas-banner::before {
+            left: 50px;
+            border-width: 12px 12px 0 0;
+            border-color: #8B0000 transparent transparent transparent;
+        }
+        
+        .christmas-banner::after {
+            right: 50px;
+            border-width: 12px 0 0 12px;
+            border-color: #8B0000 transparent transparent transparent;
+        }
+        
+        .christmas-banner span {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .shapes-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 35px;
+            max-width: 1500px;
+            margin: 40px auto;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .shape-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f5f5f5 100%);
+            border-radius: 20px;
+            padding: 25px;
+            width: 340px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.8);
+            border: 3px solid #c41e3a;
+            position: relative;
+        }
+        
+        .shape-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: #FFD700;
+            border-radius: 0 0 4px 4px;
+        }
+        
+        .shape-card h3 {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: #c41e3a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .shape-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+            margin-bottom: 15px;
+        }
+        
+        .specs {
+            font-size: 11px;
+            color: #2d5a3d;
+            background: linear-gradient(135deg, #f0fff0 0%, #e8f5e9 100%);
+            padding: 12px;
+            border-radius: 10px;
+            line-height: 1.7;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .specs strong { color: #c41e3a; }
+        
+        /* ==================== RECTANGLE - Gift Box ==================== */
+        .rectangle-shape {
+            width: 220px;
+            height: 145px;
+            background: linear-gradient(145deg, #e53935 0%, #c62828 50%, #b71c1c 100%);
+            border-radius: 4px;
+            position: relative;
+            box-shadow: 
+                0 8px 0 #7f0000,
+                0 12px 20px rgba(0,0,0,0.4),
+                inset 0 2px 10px rgba(255,255,255,0.2);
+        }
+        
+        .rectangle-shape::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 25px;
+            height: 100%;
+            background: linear-gradient(90deg, #bf8c00, #FFD700, #fff5a0, #FFD700, #bf8c00);
+        }
+        
+        .rectangle-shape::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 100%;
+            height: 25px;
+            background: linear-gradient(180deg, #bf8c00, #FFD700, #fff5a0, #FFD700, #bf8c00);
+        }
+        
+        .ribbon-bow {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+        
+        .bow-loop {
+            width: 35px;
+            height: 25px;
+            background: linear-gradient(135deg, #FFD700, #ffc107);
+            border-radius: 50% 50% 50% 50%;
+            position: absolute;
+            box-shadow: inset -3px -3px 5px rgba(0,0,0,0.2);
+        }
+        
+        .bow-loop.left { left: -30px; transform: rotate(-30deg); }
+        .bow-loop.right { right: -30px; transform: rotate(30deg); }
+        
+        .bow-center {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #FFD700, #ff8f00);
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        
+        .rectangle-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            z-index: 5;
+            background: rgba(183, 28, 28, 0.9);
+            padding: 5px 15px;
+            border-radius: 3px;
+        }
+        
+        /* ==================== OVAL - Christmas Ornament ==================== */
+        .oval-shape {
+            width: 160px;
+            height: 190px;
+            position: relative;
+        }
+        
+        .ornament-cap {
+            width: 35px;
+            height: 25px;
+            background: linear-gradient(180deg, #e0e0e0 0%, #9e9e9e 50%, #757575 100%);
+            border-radius: 5px 5px 0 0;
+            margin: 0 auto;
+            position: relative;
+            z-index: 5;
+            box-shadow: inset 0 2px 5px rgba(255,255,255,0.5);
+        }
+        
+        .ornament-cap::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 15px;
+            border: 3px solid #757575;
+            border-bottom: none;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .ornament-ball {
+            width: 160px;
+            height: 160px;
+            background: radial-gradient(ellipse at 30% 25%, #ff8a80 0%, #e53935 30%, #c62828 60%, #8b0000 100%);
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 
+                0 15px 30px rgba(0,0,0,0.4),
+                inset -20px -20px 40px rgba(0,0,0,0.3),
+                inset 15px 15px 30px rgba(255,255,255,0.2);
+        }
+        
+        .ornament-shine {
+            position: absolute;
+            top: 20px;
+            left: 25px;
+            width: 30px;
+            height: 40px;
+            background: rgba(255,255,255,0.4);
+            border-radius: 50%;
+            transform: rotate(-30deg);
+        }
+        
+        .ornament-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        /* ==================== TRIANGLE - Christmas Tree ==================== */
+        .triangle-shape {
+            width: 200px;
+            height: 260px;
+            position: relative;
+        }
+        
+        .tree-star {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 35px;
+            filter: drop-shadow(0 0 10px rgba(255,215,0,0.8));
+            z-index: 10;
+        }
+        
+        .tree-layer {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+        
+        .tree-layer.layer1 {
+            top: 30px;
+            border-width: 0 50px 70px 50px;
+            border-color: transparent transparent #2e7d32 transparent;
+            filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.3));
+        }
+        
+        .tree-layer.layer2 {
+            top: 70px;
+            border-width: 0 65px 80px 65px;
+            border-color: transparent transparent #388e3c transparent;
+            filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.3));
+        }
+        
+        .tree-layer.layer3 {
+            top: 115px;
+            border-width: 0 80px 90px 80px;
+            border-color: transparent transparent #43a047 transparent;
+            filter: drop-shadow(3px 3px 5px rgba(0,0,0,0.3));
+        }
+        
+        .tree-trunk {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35px;
+            height: 40px;
+            background: linear-gradient(90deg, #5d4037 0%, #8d6e63 50%, #5d4037 100%);
+            border-radius: 0 0 5px 5px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+        }
+        
+        .tree-ornament {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            box-shadow: inset -2px -2px 4px rgba(0,0,0,0.3), 0 2px 4px rgba(0,0,0,0.2);
+            z-index: 5;
+        }
+        
+        .tree-ornament:nth-child(5) { background: #c41e3a; top: 65px; left: 93px; }
+        .tree-ornament:nth-child(6) { background: #FFD700; top: 100px; left: 75px; }
+        .tree-ornament:nth-child(7) { background: #1565c0; top: 100px; left: 115px; }
+        .tree-ornament:nth-child(8) { background: #c41e3a; top: 135px; left: 60px; }
+        .tree-ornament:nth-child(9) { background: #9c27b0; top: 140px; left: 130px; }
+        .tree-ornament:nth-child(10) { background: #FFD700; top: 170px; left: 85px; }
+        .tree-ornament:nth-child(11) { background: #1565c0; top: 175px; left: 55px; }
+        .tree-ornament:nth-child(12) { background: #c41e3a; top: 180px; left: 140px; }
+        
+        .tree-text {
+            position: absolute;
+            top: 130px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            z-index: 10;
+        }
+        
+        /* ==================== SMILEY - Santa Face ==================== */
+        .smiley-shape {
+            width: 220px;
+            height: 250px;
+            position: relative;
+        }
+        
+        .santa-hat {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 160px;
+            height: 80px;
+            z-index: 10;
+        }
+        
+        .hat-base {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 160px;
+            height: 25px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        .hat-cone {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: 0;
+            height: 0;
+            border-left: 60px solid transparent;
+            border-right: 60px solid transparent;
+            border-bottom: 70px solid #c41e3a;
+            filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.3));
+        }
+        
+        .hat-pom {
+            position: absolute;
+            top: -5px;
+            right: 10px;
+            width: 28px;
+            height: 28px;
+            background: radial-gradient(circle at 30% 30%, white 0%, #f0f0f0 100%);
+            border-radius: 50%;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+        }
+        
+        .santa-face {
+            position: absolute;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 170px;
+            background: radial-gradient(ellipse at 40% 35%, #ffe4c4 0%, #ffd4a3 50%, #deb887 100%);
+            border-radius: 50%;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        
+        .santa-eye {
+            position: absolute;
+            top: 50px;
+            width: 18px;
+            height: 22px;
+            background: #2c1810;
+            border-radius: 50%;
+        }
+        
+        .santa-eye.left { left: 50px; }
+        .santa-eye.right { right: 50px; }
+        
+        .santa-eye::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+        }
+        
+        .santa-nose {
+            position: absolute;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 28px;
+            height: 24px;
+            background: radial-gradient(ellipse at 30% 30%, #ff9999 0%, #e53935 100%);
+            border-radius: 50%;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+        }
+        
+        .santa-cheek {
+            position: absolute;
+            top: 75px;
+            width: 25px;
+            height: 18px;
+            background: rgba(255, 150, 150, 0.5);
+            border-radius: 50%;
+        }
+        
+        .santa-cheek.left { left: 25px; }
+        .santa-cheek.right { right: 25px; }
+        
+        .santa-beard {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 160px;
+            height: 70px;
+            background: white;
+            border-radius: 0 0 80px 80px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .beard-wave {
+            position: absolute;
+            top: -15px;
+            width: 40px;
+            height: 35px;
+            background: white;
+            border-radius: 50%;
+        }
+        
+        .beard-wave:nth-child(1) { left: 10px; }
+        .beard-wave:nth-child(2) { left: 40px; }
+        .beard-wave:nth-child(3) { left: 70px; }
+        .beard-wave:nth-child(4) { left: 100px; }
+        
+        .santa-text {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: #c41e3a;
+            z-index: 10;
+        }
+        
+        /* ==================== HEART ==================== */
+        .heart-shape {
+            width: 220px;
+            height: 220px;
+            position: relative;
+        }
+        
+        .heart-bow {
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            font-size: 40px;
+            filter: drop-shadow(0 3px 5px rgba(0,0,0,0.3));
+        }
+        
+        .heart-main {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 170px;
+        }
+        
+        .heart-half {
+            position: absolute;
+            top: 0;
+            width: 90px;
+            height: 140px;
+            border-radius: 90px 90px 0 0;
+        }
+        
+        .heart-half.left {
+            left: 0;
+            background: linear-gradient(135deg, #ff5252 0%, #e53935 40%, #c62828 70%, #8b0000 100%);
+            transform: rotate(-45deg);
+            transform-origin: bottom right;
+            box-shadow: inset 10px 10px 30px rgba(255,255,255,0.2), inset -5px -5px 20px rgba(0,0,0,0.2);
+        }
+        
+        .heart-half.right {
+            right: 0;
+            background: linear-gradient(225deg, #ff5252 0%, #e53935 40%, #c62828 70%, #8b0000 100%);
+            transform: rotate(45deg);
+            transform-origin: bottom left;
+            box-shadow: inset -10px 10px 30px rgba(255,255,255,0.2), inset 5px -5px 20px rgba(0,0,0,0.2);
+        }
+        
+        .heart-shine {
+            position: absolute;
+            top: 25px;
+            left: 35px;
+            width: 25px;
+            height: 40px;
+            background: rgba(255,255,255,0.35);
+            border-radius: 50%;
+            transform: rotate(-45deg);
+            z-index: 5;
+        }
+        
+        .heart-text {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+        
+        .heart-shadow {
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 140px;
+            height: 20px;
+            background: radial-gradient(ellipse, rgba(0,0,0,0.3) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .footer p {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .footer .college {
+            font-family: 'Poppins', sans-serif;
+            color: #98FB98;
+            font-size: 14px;
+            margin-top: 10px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <!-- Snowfall -->
+    <div class="snow-container">
+        <div class="snowflake" style="left:3%;animation-duration:10s;">❄</div>
+        <div class="snowflake" style="left:10%;animation-duration:14s;animation-delay:1s;">❄</div>
+        <div class="snowflake" style="left:18%;animation-duration:11s;animation-delay:3s;">❄</div>
+        <div class="snowflake" style="left:25%;animation-duration:13s;animation-delay:2s;">❄</div>
+        <div class="snowflake" style="left:33%;animation-duration:9s;animation-delay:4s;">❄</div>
+        <div class="snowflake" style="left:40%;animation-duration:12s;animation-delay:1s;">❄</div>
+        <div class="snowflake" style="left:48%;animation-duration:15s;animation-delay:5s;">❄</div>
+        <div class="snowflake" style="left:55%;animation-duration:10s;animation-delay:2s;">❄</div>
+        <div class="snowflake" style="left:63%;animation-duration:13s;animation-delay:3s;">❄</div>
+        <div class="snowflake" style="left:70%;animation-duration:11s;animation-delay:1s;">❄</div>
+        <div class="snowflake" style="left:78%;animation-duration:14s;animation-delay:4s;">❄</div>
+        <div class="snowflake" style="left:85%;animation-duration:9s;animation-delay:2s;">❄</div>
+        <div class="snowflake" style="left:93%;animation-duration:12s;animation-delay:3s;">❄</div>
+    </div>
+    
+    <!-- Garland -->
+    <div class="garland">
+        <div class="garland-content">
+            <span>🎄</span><span>🔴</span><span>🎄</span><span>🟡</span><span>🎄</span><span>🔴</span><span>🎄</span><span>🟡</span><span>🎄</span>
+        </div>
+    </div>
+
+    <div class="header">
+        <h1>ACTIVITY 2.0</h1>
+        <p>Christmas Themed Formatted Shapes</p>
+        <div class="christmas-banner">
+            <span>🎅 Merry Christmas! 🎅</span>
+        </div>
+    </div>
+
+    <div class="shapes-container">
+        <!-- RECTANGLE -->
+        <div class="shape-card">
+            <h3>RECTANGLE</h3>
+            <div class="shape-display">
+                <div class="rectangle-shape">
+                    <div class="ribbon-bow">
+                        <div class="bow-loop left"></div>
+                        <div class="bow-loop right"></div>
+                        <div class="bow-center"></div>
+                    </div>
+                    <span class="rectangle-text">RECTANGLE</span>
+                </div>
+            </div>
+            <div class="specs">
+                <strong>Shape Format:</strong><br>
+                • Height: 1.5" | Width: 2.3"<br>
+                • Style: Diagonal Gradient – Accent 6<br>
+                • Outline: 2½ pt | Shadow Style 9<br>
+                <strong>Text:</strong> 24pt Bold Goudy Stout, Black
+            </div>
+        </div>
+
+        <!-- OVAL -->
+        <div class="shape-card">
+            <h3>OVAL</h3>
+            <div class="shape-display">
+                <div class="oval-shape">
+                    <div class="ornament-cap"></div>
+                    <div class="ornament-ball">
+                        <div class="ornament-shine"></div>
+                        <span class="ornament-text">OVAL</span>
+                    </div>
+                </div>
+            </div>
+            <div class="specs">
+                <strong>Shape Format:</strong><br>
+                • Height: 1.99" | Width: 2.58"<br>
+                • Style: Color Outline – Accent 5<br>
+                • 3-D Style 3 | Aqua Accent 5 Lighter 40%<br>
+                <strong>Text:</strong> 24pt Bold Goudy Stout, Black
+            </div>
+        </div>
+
+        <!-- TRIANGLE -->
+        <div class="shape-card">
+            <h3>TRIANGLE</h3>
+            <div class="shape-display">
+                <div class="triangle-shape">
+                    <div class="tree-star">⭐</div>
+                    <div class="tree-layer layer1"></div>
+                    <div class="tree-layer layer2"></div>
+                    <div class="tree-layer layer3"></div>
+                    <div class="tree-ornament"></div>
+                    <div class="tree-ornament"></div>
+                    <div class="tree-ornament"></div>
+                    <div class="tree-ornament"></div>
+                    <div class="tree-ornament"></div>
+                    <div class="tree-ornament"></div>
+                    <div class="tree-ornament"></div>
+                    <div class="tree-ornament"></div>
+                    <span class="tree-text">TRIANGLE</span>
+                    <div class="tree-trunk"></div>
+                </div>
+            </div>
+            <div class="specs">
+                <strong>Shape Format:</strong><br>
+                • Height: 2.63" | Width: 2.43"<br>
+                • Compound Outline – Accent 6<br>
+                • Shadow Style 10 | Purple Accent 4 Lighter 40%<br>
+                <strong>Text:</strong> 24pt Bold Goudy Stout, Black
+            </div>
+        </div>
+
+        <!-- SMILEY FACE -->
+        <div class="shape-card">
+            <h3>SMILEY FACE</h3>
+            <div class="shape-display">
+                <div class="smiley-shape">
+                    <div class="santa-hat">
+                        <div class="hat-cone"></div>
+                        <div class="hat-base"></div>
+                        <div class="hat-pom"></div>
+                    </div>
+                    <div class="santa-face">
+                        <div class="santa-eye left"></div>
+                        <div class="santa-eye right"></div>
+                        <div class="santa-nose"></div>
+                        <div class="santa-cheek left"></div>
+                        <div class="santa-cheek right"></div>
+                        <div class="santa-beard">
+                            <div class="beard-wave"></div>
+                            <div class="beard-wave"></div>
+                            <div class="beard-wave"></div>
+                            <div class="beard-wave"></div>
+                            <span class="santa-text">HO HO HO!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="specs">
+                <strong>Shape Format:</strong><br>
+                • Height: 2.71" | Width: 3.08"<br>
+                • Fill: Yellow | Outline: Long Dash, Dark Blue<br>
+                • Shadow Style 10<br>
+                <strong>Text:</strong> 24pt Bold Goudy Stout, Black
+            </div>
+        </div>
+
+        <!-- HEART -->
+        <div class="shape-card">
+            <h3>HEART</h3>
+            <div class="shape-display">
+                <div class="heart-shape">
+                    <div class="heart-bow">🎀</div>
+                    <div class="heart-main">
+                        <div class="heart-half left"></div>
+                        <div class="heart-half right"></div>
+                        <div class="heart-shine"></div>
+                        <span class="heart-text">HEART</span>
+                    </div>
+                    <div class="heart-shadow"></div>
+                </div>
+            </div>
+            <div class="specs">
+                <strong>Shape Format:</strong><br>
+                • Height: 3.44" | Width: 3.64"<br>
+                • Fill: Red | 3-D Style 12 Tilt Up, Surface Plastic<br>
+                • 3-D Color: Dark Red<br>
+                <strong>Text:</strong> 24pt Bold Goudy Stout, Black
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>✨ Season's Greetings! ✨</p>
+        <p class="college">Imus Computer College since 1988</p>
+    </div>
+</body>
+</html>
