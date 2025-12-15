@@ -425,10 +425,10 @@
             z-index: 10;
         }
         
-        /* ==================== SMILEY - Santa Face ==================== */
+        /* ==================== SMILEY - Santa Face FIXED ==================== */
         .smiley-shape {
             width: 220px;
-            height: 250px;
+            height: 280px;
             position: relative;
         }
         
@@ -437,48 +437,60 @@
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 160px;
-            height: 80px;
+            width: 180px;
+            height: 100px;
             z-index: 10;
         }
         
         .hat-base {
             position: absolute;
             bottom: 0;
-            left: 0;
+            left: 10px;
             width: 160px;
-            height: 25px;
-            background: white;
-            border-radius: 12px;
+            height: 28px;
+            background: linear-gradient(180deg, #ffffff 0%, #f0f0f0 50%, #e0e0e0 100%);
+            border-radius: 14px;
             box-shadow: 0 3px 10px rgba(0,0,0,0.2);
         }
         
         .hat-cone {
             position: absolute;
-            bottom: 20px;
-            left: 20px;
+            bottom: 22px;
+            left: 30px;
             width: 0;
             height: 0;
             border-left: 60px solid transparent;
             border-right: 60px solid transparent;
-            border-bottom: 70px solid #c41e3a;
+            border-bottom: 80px solid #c41e3a;
             filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.3));
         }
         
+        .hat-cone::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: -40px;
+            width: 80px;
+            height: 50px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+        }
+        
+        /* FIXED: Hat pom positioned at the tip of the cone */
         .hat-pom {
             position: absolute;
-            top: -5px;
-            right: 10px;
-            width: 28px;
-            height: 28px;
-            background: radial-gradient(circle at 30% 30%, white 0%, #f0f0f0 100%);
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 32px;
+            height: 32px;
+            background: radial-gradient(circle at 35% 35%, #ffffff 0%, #f5f5f5 40%, #e8e8e8 100%);
             border-radius: 50%;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.25), inset -3px -3px 8px rgba(0,0,0,0.1);
         }
         
         .santa-face {
             position: absolute;
-            top: 60px;
+            top: 80px;
             left: 50%;
             transform: translateX(-50%);
             width: 180px;
@@ -535,14 +547,25 @@
         .santa-cheek.left { left: 25px; }
         .santa-cheek.right { right: 25px; }
         
+        .santa-mouth {
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 20px;
+            border-bottom: 4px solid #8B4513;
+            border-radius: 0 0 20px 20px;
+        }
+        
         .santa-beard {
             position: absolute;
-            bottom: -20px;
+            bottom: -25px;
             left: 50%;
             transform: translateX(-50%);
             width: 160px;
-            height: 70px;
-            background: white;
+            height: 75px;
+            background: linear-gradient(180deg, #ffffff 0%, #f8f8f8 50%, #f0f0f0 100%);
             border-radius: 0 0 80px 80px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
@@ -573,89 +596,105 @@
             z-index: 10;
         }
         
-        /* ==================== HEART ==================== */
+        /* ==================== HEART - PROPER SEAMLESS HEART SHAPE ==================== */
         .heart-shape {
             width: 220px;
-            height: 220px;
+            height: 230px;
             position: relative;
         }
         
         .heart-bow {
             position: absolute;
-            top: -5px;
+            top: 15px;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 10;
-            font-size: 40px;
+            z-index: 15;
+            font-size: 35px;
             filter: drop-shadow(0 3px 5px rgba(0,0,0,0.3));
         }
         
+        /* Proper heart shape using single rotated square + circles method */
         .heart-main {
             position: absolute;
-            top: 30px;
+            top: 50px;
             left: 50%;
             transform: translateX(-50%);
-            width: 180px;
-            height: 170px;
+            width: 160px;
+            height: 160px;
         }
         
-        .heart-half {
+        .heart-body {
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            left: 25px;
+            top: 35px;
+            background: linear-gradient(135deg, #e53935 0%, #c62828 50%, #b71c1c 100%);
+            transform: rotate(45deg);
+            box-shadow: 
+                inset -8px -8px 20px rgba(0,0,0,0.3),
+                5px 5px 20px rgba(0,0,0,0.3);
+        }
+        
+        /* Left lobe - seamlessly connected */
+        .heart-body::before {
+            content: '';
+            position: absolute;
+            top: -55px;
+            left: 0;
+            width: 110px;
+            height: 110px;
+            background: linear-gradient(180deg, #ff6b6b 0%, #e53935 40%, #c62828 100%);
+            border-radius: 50%;
+            box-shadow: inset 15px 10px 25px rgba(255,255,255,0.3), inset -8px -8px 20px rgba(0,0,0,0.2);
+        }
+        
+        /* Right lobe - seamlessly connected */
+        .heart-body::after {
+            content: '';
             position: absolute;
             top: 0;
-            width: 90px;
-            height: 140px;
-            border-radius: 90px 90px 0 0;
-        }
-        
-        .heart-half.left {
-            left: 0;
-            background: linear-gradient(135deg, #ff5252 0%, #e53935 40%, #c62828 70%, #8b0000 100%);
-            transform: rotate(-45deg);
-            transform-origin: bottom right;
-            box-shadow: inset 10px 10px 30px rgba(255,255,255,0.2), inset -5px -5px 20px rgba(0,0,0,0.2);
-        }
-        
-        .heart-half.right {
-            right: 0;
-            background: linear-gradient(225deg, #ff5252 0%, #e53935 40%, #c62828 70%, #8b0000 100%);
-            transform: rotate(45deg);
-            transform-origin: bottom left;
-            box-shadow: inset -10px 10px 30px rgba(255,255,255,0.2), inset 5px -5px 20px rgba(0,0,0,0.2);
+            left: 55px;
+            width: 110px;
+            height: 110px;
+            background: linear-gradient(90deg, #e53935 0%, #c62828 60%, #b71c1c 100%);
+            border-radius: 50%;
+            box-shadow: inset -10px 15px 25px rgba(255,255,255,0.15), inset 8px -8px 20px rgba(0,0,0,0.25);
         }
         
         .heart-shine {
             position: absolute;
-            top: 25px;
-            left: 35px;
+            top: 10px;
+            left: 25px;
             width: 25px;
             height: 40px;
-            background: rgba(255,255,255,0.35);
+            background: rgba(255,255,255,0.5);
             border-radius: 50%;
-            transform: rotate(-45deg);
-            z-index: 5;
+            transform: rotate(-30deg);
+            z-index: 10;
         }
         
         .heart-text {
             position: absolute;
-            top: 80px;
+            top: 70px;
             left: 50%;
             transform: translateX(-50%);
             font-family: 'Playfair Display', serif;
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 700;
             color: #FFD700;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            z-index: 10;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+            z-index: 12;
         }
         
         .heart-shadow {
             position: absolute;
-            bottom: -15px;
+            bottom: -5px;
             left: 50%;
             transform: translateX(-50%);
             width: 140px;
-            height: 20px;
-            background: radial-gradient(ellipse, rgba(0,0,0,0.3) 0%, transparent 70%);
+            height: 25px;
+            background: radial-gradient(ellipse, rgba(0,0,0,0.35) 0%, transparent 70%);
             border-radius: 50%;
         }
         
@@ -795,9 +834,9 @@
             <div class="shape-display">
                 <div class="smiley-shape">
                     <div class="santa-hat">
+                        <div class="hat-pom"></div>
                         <div class="hat-cone"></div>
                         <div class="hat-base"></div>
-                        <div class="hat-pom"></div>
                     </div>
                     <div class="santa-face">
                         <div class="santa-eye left"></div>
@@ -805,6 +844,7 @@
                         <div class="santa-nose"></div>
                         <div class="santa-cheek left"></div>
                         <div class="santa-cheek right"></div>
+                        <div class="santa-mouth"></div>
                         <div class="santa-beard">
                             <div class="beard-wave"></div>
                             <div class="beard-wave"></div>
@@ -831,8 +871,7 @@
                 <div class="heart-shape">
                     <div class="heart-bow">🎀</div>
                     <div class="heart-main">
-                        <div class="heart-half left"></div>
-                        <div class="heart-half right"></div>
+                        <div class="heart-body"></div>
                         <div class="heart-shine"></div>
                         <span class="heart-text">HEART</span>
                     </div>

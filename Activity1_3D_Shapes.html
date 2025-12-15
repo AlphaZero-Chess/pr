@@ -144,83 +144,97 @@
             transform: rotateX(-90deg) translateZ(75px);
         }
         
-        /* ==================== TRIANGULAR PYRAMID ==================== */
-        .pyramid-tri-scene {
+        /* ==================== TRIANGULAR PYRAMID - SEAMLESS SOLID ==================== */
+        .pyramid-tri-wrapper {
             width: 200px;
-            height: 200px;
+            height: 220px;
             perspective: 800px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
         .pyramid-tri {
-            width: 200px;
-            height: 200px;
+            width: 180px;
+            height: 180px;
             position: relative;
             transform-style: preserve-3d;
-            transform: rotateX(-15deg) rotateY(-30deg);
+            transform: rotateX(-25deg) rotateY(-30deg);
             animation: pyramidRotate 25s infinite linear;
         }
         
         @keyframes pyramidRotate {
-            0% { transform: rotateX(-15deg) rotateY(0deg); }
-            100% { transform: rotateX(-15deg) rotateY(360deg); }
+            0% { transform: rotateX(-25deg) rotateY(0deg); }
+            100% { transform: rotateX(-25deg) rotateY(360deg); }
         }
         
-        .pyramid-tri-face {
+        /* Tetrahedron using CSS 3D with connected faces */
+        .tetra-face {
             position: absolute;
             width: 0;
             height: 0;
-            border-style: solid;
-            transform-origin: center bottom;
+            transform-style: preserve-3d;
         }
         
-        .pyramid-tri-face.face1 {
-            border-width: 0 70px 140px 70px;
-            border-color: transparent transparent rgba(231, 76, 60, 0.85) transparent;
-            left: 30px;
-            top: 10px;
-            transform: rotateX(30deg) rotateY(0deg) translateZ(40px);
+        /* Using border technique for seamless triangles */
+        .tetra-face-1 {
+            border-left: 65px solid transparent;
+            border-right: 65px solid transparent;
+            border-bottom: 120px solid rgba(231, 76, 60, 0.95);
+            left: 25px;
+            top: 30px;
+            transform: rotateX(30deg) translateZ(38px);
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
         }
         
-        .pyramid-tri-face.face2 {
-            border-width: 0 70px 140px 70px;
-            border-color: transparent transparent rgba(192, 57, 43, 0.85) transparent;
-            left: 30px;
-            top: 10px;
-            transform: rotateX(30deg) rotateY(120deg) translateZ(40px);
+        .tetra-face-2 {
+            border-left: 65px solid transparent;
+            border-right: 65px solid transparent;
+            border-bottom: 120px solid rgba(192, 57, 43, 0.95);
+            left: 25px;
+            top: 30px;
+            transform: rotateY(120deg) rotateX(30deg) translateZ(38px);
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.4));
         }
         
-        .pyramid-tri-face.face3 {
-            border-width: 0 70px 140px 70px;
-            border-color: transparent transparent rgba(255, 107, 107, 0.85) transparent;
-            left: 30px;
-            top: 10px;
-            transform: rotateX(30deg) rotateY(240deg) translateZ(40px);
+        .tetra-face-3 {
+            border-left: 65px solid transparent;
+            border-right: 65px solid transparent;
+            border-bottom: 120px solid rgba(255, 107, 107, 0.95);
+            left: 25px;
+            top: 30px;
+            transform: rotateY(240deg) rotateX(30deg) translateZ(38px);
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
         }
         
-        .pyramid-tri-base {
+        .tetra-base {
             position: absolute;
-            width: 120px;
-            height: 104px;
-            background: linear-gradient(135deg, rgba(146, 43, 33, 0.9) 0%, rgba(100, 30, 22, 0.9) 100%);
-            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
-            left: 40px;
-            top: 150px;
-            transform: rotateX(90deg) translateY(-30px);
+            width: 0;
+            height: 0;
+            border-left: 65px solid transparent;
+            border-right: 65px solid transparent;
+            border-bottom: 113px solid rgba(146, 43, 33, 0.95);
+            left: 25px;
+            top: 30px;
+            transform: rotateX(90deg) translateZ(-65px) rotateZ(60deg);
         }
         
-        /* ==================== CYLINDER ==================== */
-        .cylinder-scene {
-            width: 160px;
-            height: 220px;
-            perspective: 800px;
+        /* ==================== CYLINDER - PROPER 3D ==================== */
+        .cylinder-wrapper {
+            width: 200px;
+            height: 240px;
+            perspective: 1000px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
-        .cylinder {
+        .cylinder-3d {
+            position: relative;
             width: 160px;
             height: 200px;
-            position: relative;
             transform-style: preserve-3d;
-            transform: rotateX(-20deg) rotateY(-20deg);
+            transform: rotateX(-20deg) rotateY(-15deg);
             animation: cylinderRotate 18s infinite linear;
         }
         
@@ -229,57 +243,137 @@
             100% { transform: rotateX(-20deg) rotateY(360deg); }
         }
         
-        .cylinder-body {
+        /* Create cylinder body with multiple slices for 3D effect */
+        .cylinder-slice {
             position: absolute;
-            width: 140px;
-            height: 160px;
-            left: 10px;
-            top: 20px;
-            border-radius: 70px / 25px;
-            background: linear-gradient(90deg, 
-                rgba(30, 132, 73, 0.6) 0%, 
-                rgba(39, 174, 96, 0.8) 25%, 
-                rgba(46, 204, 113, 0.9) 50%, 
-                rgba(39, 174, 96, 0.8) 75%, 
-                rgba(30, 132, 73, 0.6) 100%);
+            width: 120px;
+            height: 4px;
+            left: 20px;
+            border-radius: 50%;
             transform-style: preserve-3d;
         }
         
-        .cylinder-top {
+        .cylinder-body-wrapper {
             position: absolute;
-            width: 140px;
-            height: 50px;
-            left: 10px;
+            width: 120px;
+            height: 160px;
+            left: 20px;
+            top: 20px;
+            transform-style: preserve-3d;
+        }
+        
+        /* Generate cylinder body segments */
+        .cyl-segment {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
             top: 0;
-            background: linear-gradient(135deg, rgba(88, 214, 141, 0.95) 0%, rgba(46, 204, 113, 0.95) 50%, rgba(39, 174, 96, 0.95) 100%);
+            transform-style: preserve-3d;
+        }
+        
+        .cyl-face {
+            position: absolute;
+            width: 2px;
+            height: 160px;
+            transform-origin: center center;
+        }
+        
+        /* Create the curved surface illusion with gradient */
+        .cylinder-surface {
+            position: absolute;
+            width: 120px;
+            height: 160px;
+            left: 20px;
+            top: 20px;
+            background: linear-gradient(90deg, 
+                rgba(20, 90, 50, 0.9) 0%, 
+                rgba(30, 132, 73, 0.95) 15%, 
+                rgba(46, 204, 113, 1) 35%, 
+                rgba(88, 214, 141, 1) 50%, 
+                rgba(46, 204, 113, 1) 65%, 
+                rgba(30, 132, 73, 0.95) 85%, 
+                rgba(20, 90, 50, 0.9) 100%);
+            border-radius: 60px / 20px;
+            box-shadow: 
+                inset -30px 0 50px rgba(0,0,0,0.3),
+                inset 30px 0 50px rgba(255,255,255,0.1);
+        }
+        
+        .cylinder-top-cap {
+            position: absolute;
+            width: 120px;
+            height: 40px;
+            left: 20px;
+            top: 0;
+            background: linear-gradient(135deg, 
+                rgba(88, 214, 141, 1) 0%, 
+                rgba(46, 204, 113, 1) 40%, 
+                rgba(39, 174, 96, 0.95) 100%);
             border-radius: 50%;
             border: 2px solid rgba(30, 132, 73, 0.8);
-            transform: rotateX(90deg) translateZ(80px);
-            box-shadow: inset 0 0 30px rgba(255,255,255,0.2);
+            transform: rotateX(70deg) translateZ(0px);
+            box-shadow: 
+                inset 10px 5px 20px rgba(255,255,255,0.4),
+                inset -10px -5px 20px rgba(0,0,0,0.2),
+                0 5px 15px rgba(0,0,0,0.3);
         }
         
-        .cylinder-bottom {
+        .cylinder-bottom-cap {
             position: absolute;
-            width: 140px;
-            height: 50px;
-            left: 10px;
+            width: 120px;
+            height: 40px;
+            left: 20px;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(20, 90, 50, 0.95) 0%, rgba(30, 132, 73, 0.95) 100%);
+            background: linear-gradient(135deg, 
+                rgba(20, 90, 50, 0.95) 0%, 
+                rgba(30, 132, 73, 0.95) 100%);
             border-radius: 50%;
-            transform: rotateX(90deg) translateZ(-80px);
+            border: 2px solid rgba(20, 90, 50, 0.9);
+            transform: rotateX(70deg) translateZ(0px);
+            box-shadow: inset 0 -5px 15px rgba(0,0,0,0.4);
         }
         
-        /* ==================== SQUARE PYRAMID ==================== */
-        .pyramid-sq-scene {
-            width: 200px;
-            height: 220px;
+        .cylinder-edge-left {
+            position: absolute;
+            width: 4px;
+            height: 160px;
+            left: 18px;
+            top: 20px;
+            background: linear-gradient(180deg,
+                rgba(20, 90, 50, 0.9) 0%,
+                rgba(30, 100, 60, 0.95) 50%,
+                rgba(20, 90, 50, 0.9) 100%);
+            border-radius: 2px;
+        }
+        
+        .cylinder-edge-right {
+            position: absolute;
+            width: 4px;
+            height: 160px;
+            right: 38px;
+            top: 20px;
+            background: linear-gradient(180deg,
+                rgba(88, 214, 141, 0.8) 0%,
+                rgba(70, 200, 120, 0.9) 50%,
+                rgba(88, 214, 141, 0.8) 100%);
+            border-radius: 2px;
+        }
+        
+        /* ==================== SQUARE PYRAMID - FIXED ==================== */
+        .pyramid-sq-wrapper {
+            width: 220px;
+            height: 240px;
             perspective: 800px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
         .pyramid-sq {
+            position: relative;
             width: 200px;
             height: 200px;
-            position: relative;
             transform-style: preserve-3d;
             transform: rotateX(-20deg) rotateY(-45deg);
             animation: sqPyramidRotate 22s infinite linear;
@@ -290,47 +384,48 @@
             100% { transform: rotateX(-20deg) rotateY(360deg); }
         }
         
-        .pyramid-sq-face {
+        /* Square pyramid with proper connected faces */
+        .sq-pyr-face {
             position: absolute;
-            width: 0;
-            height: 0;
-            border-style: solid;
-            transform-origin: center bottom;
+            width: 120px;
+            height: 130px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            transform-origin: bottom center;
         }
         
-        .pyramid-sq-face.sq-face1 {
-            border-width: 0 60px 130px 60px;
-            border-color: transparent transparent rgba(155, 89, 182, 0.85) transparent;
+        .sq-pyr-face-1 {
+            background: linear-gradient(180deg, rgba(155, 89, 182, 0.95) 0%, rgba(142, 68, 173, 0.95) 100%);
             left: 40px;
             top: 15px;
-            transform: rotateX(32deg) rotateY(0deg) translateZ(60px);
+            transform: rotateX(26deg) translateZ(60px);
+            box-shadow: inset 0 -30px 40px rgba(0,0,0,0.3);
         }
         
-        .pyramid-sq-face.sq-face2 {
-            border-width: 0 60px 130px 60px;
-            border-color: transparent transparent rgba(142, 68, 173, 0.85) transparent;
+        .sq-pyr-face-2 {
+            background: linear-gradient(180deg, rgba(142, 68, 173, 0.95) 0%, rgba(125, 60, 152, 0.95) 100%);
             left: 40px;
             top: 15px;
-            transform: rotateX(32deg) rotateY(90deg) translateZ(60px);
+            transform: rotateY(90deg) rotateX(26deg) translateZ(60px);
+            box-shadow: inset 0 -30px 40px rgba(0,0,0,0.4);
         }
         
-        .pyramid-sq-face.sq-face3 {
-            border-width: 0 60px 130px 60px;
-            border-color: transparent transparent rgba(125, 60, 152, 0.85) transparent;
+        .sq-pyr-face-3 {
+            background: linear-gradient(180deg, rgba(125, 60, 152, 0.95) 0%, rgba(108, 52, 131, 0.95) 100%);
             left: 40px;
             top: 15px;
-            transform: rotateX(32deg) rotateY(180deg) translateZ(60px);
+            transform: rotateY(180deg) rotateX(26deg) translateZ(60px);
+            box-shadow: inset 0 -30px 40px rgba(0,0,0,0.35);
         }
         
-        .pyramid-sq-face.sq-face4 {
-            border-width: 0 60px 130px 60px;
-            border-color: transparent transparent rgba(165, 105, 189, 0.85) transparent;
+        .sq-pyr-face-4 {
+            background: linear-gradient(180deg, rgba(165, 105, 189, 0.95) 0%, rgba(155, 89, 182, 0.95) 100%);
             left: 40px;
             top: 15px;
-            transform: rotateX(32deg) rotateY(270deg) translateZ(60px);
+            transform: rotateY(270deg) rotateX(26deg) translateZ(60px);
+            box-shadow: inset 0 -30px 40px rgba(0,0,0,0.25);
         }
         
-        .pyramid-sq-base {
+        .sq-pyr-base {
             position: absolute;
             width: 120px;
             height: 120px;
@@ -338,6 +433,7 @@
             left: 40px;
             top: 145px;
             transform: rotateX(90deg) translateZ(-60px);
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.4);
         }
         
         .footer {
@@ -382,12 +478,12 @@
         <div class="shape-card">
             <h2>TRIANGULAR BASE PYRAMID</h2>
             <div class="shape-container">
-                <div class="pyramid-tri-scene">
+                <div class="pyramid-tri-wrapper">
                     <div class="pyramid-tri">
-                        <div class="pyramid-tri-face face1"></div>
-                        <div class="pyramid-tri-face face2"></div>
-                        <div class="pyramid-tri-face face3"></div>
-                        <div class="pyramid-tri-base"></div>
+                        <div class="tetra-face tetra-face-1"></div>
+                        <div class="tetra-face tetra-face-2"></div>
+                        <div class="tetra-face tetra-face-3"></div>
+                        <div class="tetra-base"></div>
                     </div>
                 </div>
             </div>
@@ -397,11 +493,13 @@
         <div class="shape-card">
             <h2>CYLINDER</h2>
             <div class="shape-container">
-                <div class="cylinder-scene">
-                    <div class="cylinder">
-                        <div class="cylinder-top"></div>
-                        <div class="cylinder-body"></div>
-                        <div class="cylinder-bottom"></div>
+                <div class="cylinder-wrapper">
+                    <div class="cylinder-3d">
+                        <div class="cylinder-top-cap"></div>
+                        <div class="cylinder-surface"></div>
+                        <div class="cylinder-edge-left"></div>
+                        <div class="cylinder-edge-right"></div>
+                        <div class="cylinder-bottom-cap"></div>
                     </div>
                 </div>
             </div>
@@ -411,13 +509,13 @@
         <div class="shape-card">
             <h2>SQUARE BASE PYRAMID</h2>
             <div class="shape-container">
-                <div class="pyramid-sq-scene">
+                <div class="pyramid-sq-wrapper">
                     <div class="pyramid-sq">
-                        <div class="pyramid-sq-face sq-face1"></div>
-                        <div class="pyramid-sq-face sq-face2"></div>
-                        <div class="pyramid-sq-face sq-face3"></div>
-                        <div class="pyramid-sq-face sq-face4"></div>
-                        <div class="pyramid-sq-base"></div>
+                        <div class="sq-pyr-face sq-pyr-face-1"></div>
+                        <div class="sq-pyr-face sq-pyr-face-2"></div>
+                        <div class="sq-pyr-face sq-pyr-face-3"></div>
+                        <div class="sq-pyr-face sq-pyr-face-4"></div>
+                        <div class="sq-pyr-base"></div>
                     </div>
                 </div>
             </div>
